@@ -111,7 +111,7 @@ module BusinessCatalyst
         ["Variations Code", :variations_code],
         ["Variation Options", :variations_options],
         ["Role Responsible", :role_responsible],
-        ["Product Meta Description", :product_meta_description],
+        ["Product Meta Description", :product_meta_description]
       ]
 
       private
