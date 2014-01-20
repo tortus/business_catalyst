@@ -6,11 +6,11 @@ require 'business_catalyst/version'
 Gem::Specification.new do |spec|
   spec.name          = "business_catalyst"
   spec.version       = BusinessCatalyst::VERSION
-  spec.authors       = ["William Makley"]
-  spec.email         = ["wmakley@tortus.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.authors       = ["Tortus Technologies"]
+  spec.email         = ["support@tortus.com"]
+  spec.description   = %q{Gem to help interface with Adobe Business Catalyst. Mainly for exporting product data to BC.}
+  spec.summary       = %q{Gem to help interface with Adobe Business Catalyst. Mainly for exporting product data to BC.}
+  spec.homepage      = "https://github.com/tortus/business_catalyst"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
