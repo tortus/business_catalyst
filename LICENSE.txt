@@ -1,4 +1,4 @@
-Copyright (c) 2014 William Makley
+Copyright (c) 2014 Tortus Technologies, Inc.
 
 MIT License
 
