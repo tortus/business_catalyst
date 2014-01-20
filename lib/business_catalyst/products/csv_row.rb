@@ -49,7 +49,12 @@ module BusinessCatalyst
         end
       end
 
-      # Header, method, default
+
+      def self.columns
+        COLUMNS
+      end
+
+      # [Header, method, default (optional)]
       COLUMNS = [
         ["Product Code", :product_code],
         ["Name", :name],
