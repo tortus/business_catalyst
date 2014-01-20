@@ -126,8 +126,9 @@ module BusinessCatalyst
                   else
                     default
                   end
-          if respond_to?("transform_#{method}")
-            send("transform_#{method}", input)
+          transformer = "transform_" + method.to_s.sub(/\?\z/, "")
+          if respond_to?(transformer)
+            send(transformer, input)
           else
             transform_generic_input(input)
           end
