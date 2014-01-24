@@ -114,7 +114,7 @@ module BusinessCatalyst
         ["Product Meta Description", :product_meta_description]
       ]
 
-      private
+      protected
 
         # Internal method to get the final CSV output for a column.
         # Uses column default if method is not implemented, then
@@ -126,8 +126,8 @@ module BusinessCatalyst
                   else
                     default
                   end
-          transformer = "transform_" + method.to_s.sub(/\?\z/, "")
-          if respond_to?(transformer)
+          transformer = ("transform_" + method.to_s.sub(/\?\z/, "")).to_sym
+          if methods.include?(transformer)
             send(transformer, input)
           else
             transform_generic_input(input)
