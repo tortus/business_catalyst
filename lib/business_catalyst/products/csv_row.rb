@@ -80,7 +80,7 @@ module BusinessCatalyst
         ["Grouping Product Descriptions", :grouping_product_description],
         ["Supplier CRM ID", :supplier_crm_id],
         ["Supplier Commission Percentage", :supplier_commission_percentage],
-        ["Weighting/Order", :weighting_or_order],
+        ["Weighting/Order", :weighting_order],
         ["Related Products", :related_products, []],
         ["Weight In KG/Pounds", :weight_in_kg_or_pounds],
         ["Product Width (Previously Volume)", :product_width],
