@@ -136,21 +136,23 @@ module BusinessCatalyst
 
         def transform_generic_input(input)
           case input
-          when true, false
-            input ? "Y" : "N"
+          when true
+            "Y"
+          when false
+            "N"
           when Array
             input.join(";")
           else
-            input
+            input.to_s
           end
         end
 
         def transform_catalogue(input)
           if input
-            normalized = input.map do |catalog|
+            sanitized = input.map { |catalog|
               catalog.gsub("/", "").squish
-            end
-            "/" + normalized.join("/") + "/;"
+            }
+            "/" + sanitized.join("/") + "/;"
           end
         end
 
