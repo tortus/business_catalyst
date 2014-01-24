@@ -140,20 +140,20 @@ module BusinessCatalyst
           if methods.include?(transformer)
             send(transformer, input)
           else
-            transform_generic_input(input)
+            transform_generic_input(input, method.to_s)
           end
         end
 
-        def transform_generic_input(input)
-          case input
-          when true
-            "Y"
-          when false
-            "N"
-          when Array
-            input.join(";")
+        def transform_generic_input(input, column_name)
+          if column_name[-1] == "?"
+            input ? "Y" : "N"
           else
-            input.to_s
+            case input
+            when Array
+              input.join(";")
+            else
+              input.to_s
+            end
           end
         end
 
