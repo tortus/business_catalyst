@@ -150,7 +150,7 @@ module BusinessCatalyst
         def transform_catalogue(input)
           if input
             sanitized = input.map { |catalog|
-              catalog.gsub("/", "").squish
+              catalog.gsub("/", "").gsub(/\s{2,}/, " ")
             }
             "/" + sanitized.join("/") + "/;"
           end
