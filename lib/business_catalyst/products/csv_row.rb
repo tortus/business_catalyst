@@ -22,11 +22,11 @@ module BusinessCatalyst
     #       @product = product
     #     end
     #
-    #     def product_code
+    #     map :product_code do
     #       @product.code
     #     end
     #
-    #     def inventory_control?
+    #     map :inventory_control? do
     #       false
     #     end
     #
@@ -41,6 +41,16 @@ module BusinessCatalyst
 
       def self.headers
         @headers ||= COLUMNS.map(&:first)
+      end
+
+      # Way of implementing BC properties and making sure you get the name right.
+      # Has added benefit of making it easier to differentiate between
+      # instance methods and instance methods that map to BC columns.
+      def self.map(column, &block)
+        unless columns.any? {|c| c[1] == column}
+          raise ArgumentError, "no such column '#{column}'"
+        end
+        define_method(column, &block)
       end
 
       def to_a
