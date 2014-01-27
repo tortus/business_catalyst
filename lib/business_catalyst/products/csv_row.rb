@@ -179,7 +179,7 @@ module BusinessCatalyst
         #
         # The default currency may be changed by setting #default_currency.
         def number_to_currency(input)
-          if input.kind_of?(Numeric) || input !~ /\A(\w+)\/\d/
+          if input && (input.kind_of?(Numeric) || input !~ /\A(\w+)\/\d/)
             "#{default_currency}/#{input}"
           else
             input
@@ -189,7 +189,7 @@ module BusinessCatalyst
         def transform_currency(input)
           Array(input).map {|n|
             number_to_currency(n)
-          }.join(";") + ";"
+          }.compact.join(";") + ";"
         end
 
         [:sale_price, :retail_price, :wholesale_sale_price].each do |currency_column|
