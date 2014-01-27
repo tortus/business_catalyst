@@ -172,6 +172,32 @@ module BusinessCatalyst
           end
         end
 
+        # Convert a single number or string to the currency format
+        # expected by business catalyst, e.g. "10.23" becomes "US/10.23"
+        #
+        # Does nothing if the input is already a string in this format.
+        #
+        # The default currency may be changed by setting #default_currency.
+        def number_to_currency(input)
+          if input.kind_of?(Numeric) || input !~ /\A(\w+)\/\d/
+            "#{default_currency}/#{input}"
+          else
+            input
+          end
+        end
+
+        def transform_currency(input)
+          Array(input).map {|n|
+            number_to_currency(n)
+          }.join(";") + ";"
+        end
+
+        [:sale_price, :retail_price, :wholesale_sale_price].each do |currency_column|
+          define_method("transform_#{currency_column}") do |input|
+            transform_currency(input)
+          end
+        end
+
     end
   end
 end
