@@ -39,6 +39,12 @@ module BusinessCatalyst
     #
     class CSVRow
 
+      attr_accessor :default_currency
+
+      def initialize
+        @default_currency ||= "US"
+      end
+
       def self.headers
         @headers ||= COLUMNS.map(&:first)
       end
