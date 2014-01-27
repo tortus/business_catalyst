@@ -20,6 +20,7 @@ module BusinessCatalyst
     #
     #     def initialize(product)
     #       @product = product
+    #       super
     #     end
     #
     #     map :product_code do
@@ -41,7 +42,7 @@ module BusinessCatalyst
 
       attr_accessor :default_currency
 
-      def initialize
+      def initialize(*args)
         @default_currency ||= "US"
       end
 
