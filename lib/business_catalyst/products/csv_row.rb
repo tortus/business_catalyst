@@ -188,9 +188,12 @@ module BusinessCatalyst
         end
 
         def transform_currency(input)
-          Array(input).map {|n|
-            number_to_currency(n)
-          }.compact.join(";") + ";"
+          if input
+            inputs = Array(input).map {|n| number_to_currency(n) }.compact
+            if inputs.any?
+              inputs.join(";") + ";"
+            end
+          end
         end
 
         [:sale_price, :retail_price, :wholesale_sale_price].each do |currency_column|
