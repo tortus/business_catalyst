@@ -156,7 +156,7 @@ module BusinessCatalyst
           else
             case input
             when Array
-              input.join(";")
+              input.join(";") + ";"
             else
               input.to_s
             end
