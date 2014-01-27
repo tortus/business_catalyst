@@ -172,11 +172,6 @@ module BusinessCatalyst
           end
         end
 
-        # Make sure enabled is false if input is nil
-        def transform_enabled(input)
-          input ? "Y" : "N"
-        end
-
     end
   end
 end
