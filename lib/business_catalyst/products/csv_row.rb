@@ -47,10 +47,6 @@ module BusinessCatalyst
         @default_currency ||= "US"
       end
 
-      def self.headers
-        @headers ||= COLUMNS.map(&:first)
-      end
-
       # Way of implementing BC properties and making sure you get the name right.
       # Has added benefit of making it easier to differentiate between
       # instance methods and instance methods that map to BC columns.
@@ -62,11 +58,14 @@ module BusinessCatalyst
       end
 
       def to_a
-        COLUMNS.map do |column|
+        COLUMNS.map { |column|
           csv_value_for_column(column)
-        end
+        }
       end
 
+      def self.headers
+        @headers ||= columns.map(&:first)
+      end
 
       def self.columns
         COLUMNS
