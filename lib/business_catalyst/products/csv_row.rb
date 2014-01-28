@@ -169,7 +169,7 @@ module BusinessCatalyst
             sanitized = input.map { |catalog|
               catalog.gsub("/", "").gsub(/\s{2,}/, " ")
             }
-            "/" + sanitized.join("/") + "/;"
+            "/" + sanitized.join("/")
           end
         end
 
@@ -191,7 +191,7 @@ module BusinessCatalyst
           if input
             inputs = Array(input).map {|n| number_to_currency(n) }.compact
             if inputs.any?
-              inputs.join(";") + ";"
+              inputs.join(";")
             end
           end
         end
