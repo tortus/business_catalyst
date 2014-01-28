@@ -36,6 +36,7 @@ module BusinessCatalyst
     #
     # Later, with a CSV opened for writing:
     #
+    #   some_csv << ExportRow.headers
     #   some_csv << row_instance.to_a
     #
     class CSVRow
