@@ -181,7 +181,7 @@ module BusinessCatalyst
         # The default currency may be changed by setting #default_currency.
         def number_to_currency(input)
           if input && (input_s = input.to_s).strip != ""
-            if input_s =~ /\A(\w+)\/\d/)
+            if input_s =~ /\A(\w+)\/\d/
               input
             else
               "#{default_currency}/#{input}"
