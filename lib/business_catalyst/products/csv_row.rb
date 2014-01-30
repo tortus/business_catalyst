@@ -142,7 +142,7 @@ module BusinessCatalyst
                   default
                 end
         transformer = ("transform_" + method.to_s.sub(/\?\z/, "")).to_sym
-        if methods.include?(transformer)
+        if methods.map{|m| m.to_sym}.include?(transformer)
           send(transformer, input)
         else
           transform_generic_input(input, method.to_s)
