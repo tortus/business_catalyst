@@ -44,4 +44,66 @@ describe BusinessCatalyst::Products::CSVRow do
     end
 
   end
+
+  describe "currency handling" do
+    let(:currency_columns) { [:sale_price, :retail_price, :wholesale_sale_price] }
+    let(:test_price) { 10.0 }
+    before(:each) do
+      subject.default_currency = "US"
+      currency_columns.each do |column|
+        subject.stub(column) { test_price }
+      end
+    end
+
+    it "treats :sale_price, :retail_price, :wholesale_sale_price as currency" do
+      currency_columns.each do |column|
+        subject.should_receive(:number_to_currency).with(test_price).and_return("US/10.00")
+        subject.csv_value(column).should eq("US/10.00")
+      end
+    end
+
+    context "with single numeric" do
+      it "converts the number to the BC format" do
+        subject.csv_value(:sale_price).should eq("US/#{test_price.to_s}")
+      end
+      it "prepends #default_currency" do
+        subject.default_currency = "AU"
+        subject.csv_value(:sale_price).should eq("AU/#{test_price.to_s}")
+      end
+    end
+
+    context "with single string" do
+      it "does nothing if string looks like BC format already" do
+        subject.stub(:sale_price) { "US/10.00" }
+        subject.csv_value(:sale_price).should eq("US/10.00")
+      end
+      it "prepends #default_currency if no currency provided" do
+        subject.stub(:sale_price) { "10.00" }
+        subject.csv_value(:sale_price).should eq("US/10.00")
+      end
+      it "converts blank string to nil" do
+        subject.stub(:sale_price) { " " }
+        subject.csv_value(:sale_price).should be_nil
+      end
+      it "strips whitespace" do
+        subject.stub(:sale_price) { " 2.0 " }
+        subject.csv_value(:sale_price).should eq("US/2.0")
+      end
+    end
+
+    context "with array of numbers" do
+      it "converts each number to BC currency and joins with ';'" do
+        subject.stub(:sale_price) { [1.0, 2.0, 3.0] }
+        subject.csv_value(:sale_price).should eq("US/1.0;US/2.0;US/3.0")
+      end
+    end
+
+    context "with array of numbers and strings" do
+      it "converts each value as it would with single values, and joins with ';'" do
+        subject.stub(:sale_price) { [1.0, " 2.0 ", " ", "US/3.0"] }
+        subject.csv_value(:sale_price).should eq("US/1.0;US/2.0;US/3.0")
+      end
+    end
+  end # currency handling
+
 end
