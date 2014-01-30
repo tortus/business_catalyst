@@ -178,7 +178,10 @@ module BusinessCatalyst
         #
         # Does nothing if the input is already a string in this format.
         #
-        # The default currency may be changed by setting #default_currency.
+        # Returns nil if input is blank or can't be converted.
+        #
+        # The default currency may be changed by setting #default_currency=
+        # in #initialize.
         def number_to_currency(input)
           if input && (input_s = input.to_s).strip != ""
             if input_s =~ /\A(\w+)\/\d/
