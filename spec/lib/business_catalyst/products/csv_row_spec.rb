@@ -108,8 +108,8 @@ describe BusinessCatalyst::Products::CSVRow do
 
     context "with array of numbers and strings" do
       it "converts each value as it would with single values, and joins with ';'" do
-        subject.stub(:sale_price) { [1.0, " 2.0 ", " ", "US/3.0"] }
-        subject.csv_value(:sale_price).should eq("US/1.0;US/2.0;US/3.0")
+        subject.stub(:sale_price) { [1.0, " 2.0 ", " ", "AU/3.0"] }
+        subject.csv_value(:sale_price).should eq("US/1.0;US/2.0;AU/3.0")
       end
     end
   end # currency handling
