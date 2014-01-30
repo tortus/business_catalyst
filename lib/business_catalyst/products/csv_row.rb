@@ -132,9 +132,9 @@ module BusinessCatalyst
         ["Product Meta Description", :product_meta_description]
       ]
 
-      # Internal method to get the final CSV output for a column.
+      # Get the final CSV output for a column.
       # Uses default if method is not implemented, then
-      # normalizes value to the form expected by BC.
+      # normalizes value to whatever is expected by BC.
       def csv_value(method, default = nil)
         input = if respond_to?(method)
                   send(method)
