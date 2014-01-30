@@ -45,6 +45,14 @@ describe BusinessCatalyst::Products::CSVRow do
 
   end
 
+  describe "#to_a" do
+    it "maps csv_value for every column to an array" do
+      subject.class.stub(:columns) { [["Product Code", :product_code]] }
+      subject.should_receive(:csv_value).with(:product_code, nil).and_return("product_code")
+      subject.to_a.should eq(["product_code"])
+    end
+  end
+
   describe "currency handling" do
     let(:currency_columns) { [:sale_price, :retail_price, :wholesale_sale_price] }
     let(:test_price) { 10.0 }

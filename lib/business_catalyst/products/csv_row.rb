@@ -58,9 +58,9 @@ module BusinessCatalyst
       end
 
       def to_a
-        COLUMNS.map { |column|
+        self.class.columns.map { |column|
           _, method, default = *column
-          csv_value(column, default)
+          csv_value(method, default)
         }
       end
 
