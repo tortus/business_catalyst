@@ -59,7 +59,8 @@ module BusinessCatalyst
 
       def to_a
         COLUMNS.map { |column|
-          csv_value_for_column(column)
+          _, method, default = *column
+          csv_value(column, default)
         }
       end
 
@@ -131,25 +132,24 @@ module BusinessCatalyst
         ["Product Meta Description", :product_meta_description]
       ]
 
-      protected
-
-        # Internal method to get the final CSV output for a column.
-        # Uses column default if method is not implemented, then
-        # normalizes value to the form expected by BC.
-        def csv_value_for_column(column)
-          header, method, default = *column
-          input = if respond_to?(method)
-                    send(method)
-                  else
-                    default
-                  end
-          transformer = ("transform_" + method.to_s.sub(/\?\z/, "")).to_sym
-          if methods.include?(transformer)
-            send(transformer, input)
-          else
-            transform_generic_input(input, method.to_s)
-          end
+      # Internal method to get the final CSV output for a column.
+      # Uses default if method is not implemented, then
+      # normalizes value to the form expected by BC.
+      def csv_value(method, default = nil)
+        input = if respond_to?(method)
+                  send(method)
+                else
+                  default
+                end
+        transformer = ("transform_" + method.to_s.sub(/\?\z/, "")).to_sym
+        if methods.include?(transformer)
+          send(transformer, input)
+        else
+          transform_generic_input(input, method.to_s)
         end
+      end
+
+      protected
 
         def transform_generic_input(input, column_name)
           if column_name[-1] == "?"
