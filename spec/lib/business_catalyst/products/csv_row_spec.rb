@@ -47,8 +47,8 @@ describe BusinessCatalyst::Products::CSVRow do
 
   describe "#to_a" do
     it "maps csv_value for every column to an array" do
-      subject.class.stub(:columns) { [["Product Code", :product_code]] }
-      subject.should_receive(:csv_value).with(:product_code, nil).and_return("product_code")
+      subject.class.stub(:columns) { [["Product Code", :product_code, :default]] }
+      subject.should_receive(:csv_value).with(:product_code, :default).and_return("product_code")
       subject.to_a.should eq(["product_code"])
     end
   end
