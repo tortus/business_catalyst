@@ -80,7 +80,7 @@ module BusinessCatalyst
         ["Description", :description],
         ["Small Image", :small_image],
         ["Large Image", :large_image],
-        ["Catalogue", :catalogue, []],
+        ["Catalogue", :catalogue, []], # Can be an array of path names, or an array of arrays of path names (multiple catalogs)
         ["Sell Price", :sell_price],
         ["Recommended Retail Price", :recommended_retail_price],
         ["Tax Code", :tax_code],
@@ -166,12 +166,19 @@ module BusinessCatalyst
         end
 
         def transform_catalogue(input)
-          if input
-            sanitized = input.map { |catalog|
-              catalog.gsub("/", "").gsub(/\s{2,}/, " ")
-            }
-            "/" + sanitized.join("/")
+          input = Array(input) # ensure at least a 1D array
+
+          # convert to array of arrays if not already
+          unless input.fetch(0, nil).kind_of?(Array)
+            input = [input]
           end
+
+          input.map { |catalog_names|
+            sanitized_names = catalog_names.map { |name|
+              name.gsub(/[\/;]/, " ").gsub(/\s{2,}/, " ")
+            }
+            "/" + sanitized_names.join("/")
+          }.join(";")
         end
 
         # Convert a single number or string to the currency format
