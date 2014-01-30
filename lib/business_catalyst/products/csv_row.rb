@@ -166,7 +166,7 @@ module BusinessCatalyst
         end
 
         def transform_catalogue(input)
-          input = Array(input) # ensure at least a 1D array
+          input = [input] unless input.kind_of?(Array) # ensure at least a 1D array
 
           # convert to array of arrays if not already
           unless input.fetch(0, nil).kind_of?(Array)
