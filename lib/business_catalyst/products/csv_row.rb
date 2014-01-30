@@ -175,7 +175,7 @@ module BusinessCatalyst
 
           input.map { |catalog_names|
             sanitized_names = catalog_names.map { |name|
-              name.gsub(/[\/;]/, " ").gsub(/\s{2,}/, " ")
+              name.gsub(/[\/;]/, " ").gsub(/\s+/, " ")
             }
             "/" + sanitized_names.join("/")
           }.join(";")

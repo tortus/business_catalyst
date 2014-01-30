@@ -139,6 +139,10 @@ describe BusinessCatalyst::Products::CSVRow do
       subject.stub(:catalogue) { "A  B" }
       subject.csv_value(:catalogue).should eq("/A B")
     end
+    it "converts all whitespace characters to plain old space" do
+      subject.stub(:catalogue) { "A\nB" }
+      subject.csv_value(:catalogue).should eq("/A B")
+    end
   end
 
 end
