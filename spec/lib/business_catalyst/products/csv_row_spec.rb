@@ -53,6 +53,21 @@ describe BusinessCatalyst::Products::CSVRow do
     end
   end
 
+  describe "boolean handling" do
+    it "converts true to 'Y'" do
+      subject.stub(:enabled?) { true }
+      subject.csv_value(:enabled?).should eq("Y")
+    end
+    it "converts false to 'N'" do
+      subject.stub(:enabled?) { false }
+      subject.csv_value(:enabled?).should eq("N")
+    end
+    it "converts nil to 'N'" do
+      subject.stub(:enabled?) { false }
+      subject.csv_value(:enabled?).should eq("N")
+    end
+  end
+
   describe "currency handling" do
     let(:currency_columns) { [:sale_price, :retail_price, :wholesale_sale_price] }
     let(:test_price) { 10.0 }

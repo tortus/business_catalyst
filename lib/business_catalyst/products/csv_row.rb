@@ -145,24 +145,28 @@ module BusinessCatalyst
         transformer = ("transform_" + method.to_s.sub(/\?\z/, "")).to_sym
         if methods.map{|m| m.to_sym}.include?(transformer)
           send(transformer, input)
+        elsif method.to_s[-1] == "?"
+          transform_boolean(input)
         else
-          transform_generic_input(input, method.to_s)
+          transform_generic_input(input)
         end
       end
 
       protected
 
-        def transform_generic_input(input, column_name)
-          if column_name[-1] == "?"
-            input ? "Y" : "N"
+        def transform_generic_input(input)
+          case input
+          when true, false
+            transform_boolean(input)
+          when Array
+            input.join(";")
           else
-            case input
-            when Array
-              input.join(";")
-            else
-              input.to_s
-            end
+            input.to_s
           end
+        end
+
+        def transform_boolean(input)
+          input ? "Y" : "N"
         end
 
         def transform_catalogue(input)
