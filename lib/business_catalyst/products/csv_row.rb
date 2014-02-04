@@ -86,7 +86,7 @@ module BusinessCatalyst
         ["Tax Code", :tax_code],
         ["SEO friendly URL", :seo_friendly_url],
         ["Grouping Product Codes", :grouping_product_codes],
-        ["Grouping Product Descriptions", :grouping_product_description],
+        ["Grouping Product Descriptions", :grouping_product_descriptions],
         ["Supplier CRM ID", :supplier_crm_id],
         ["Supplier Commission Percentage", :supplier_commission_percentage],
         ["Weighting/Order", :weighting_order],
