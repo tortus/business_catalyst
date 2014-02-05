@@ -43,6 +43,7 @@ module BusinessCatalyst
     #   end
     #
     class CSVRow
+      NoSuchColumnError = Class.new(StandardError)
 
       attr_accessor :default_currency
 
@@ -55,7 +56,7 @@ module BusinessCatalyst
       # instance methods and instance methods that map to BC columns.
       def self.map(column, &block)
         unless columns.any? {|c| c[1] == column}
-          raise ArgumentError, "no such column '#{column}'"
+          raise NoSuchColumnError, "no such column '#{column}'"
         end
         define_method(column, &block)
       end

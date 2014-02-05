@@ -30,7 +30,7 @@ describe BusinessCatalyst::Products::CSVRow do
       context "when column is not valid column name" do
         it "raises ArgumentError" do
           subject.columns.any? {|c| c[1] == :fubar}.should be_false
-          expect { subject.map(:fubar) }.to raise_error(ArgumentError)
+          expect { subject.map(:fubar) }.to raise_error(BusinessCatalyst::Products::CSVRow::NoSuchColumnError)
         end
       end
       context "when column is a valid column name" do
