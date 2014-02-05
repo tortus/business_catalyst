@@ -213,7 +213,7 @@ module BusinessCatalyst
           end
         end
 
-        [:sell_price, :retail_price, :wholesale_sale_price].each do |currency_column|
+        [:sell_price, :recommended_retail_price, :wholesale_sale_price].each do |currency_column|
           define_method("transform_#{currency_column}") do |input|
             transform_currency(input)
           end

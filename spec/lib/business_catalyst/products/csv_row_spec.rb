@@ -69,7 +69,7 @@ describe BusinessCatalyst::Products::CSVRow do
   end
 
   describe "currency handling" do
-    let(:currency_columns) { [:sell_price, :retail_price, :wholesale_sale_price] }
+    let(:currency_columns) { [:sell_price, :recommended_retail_price, :wholesale_sale_price] }
     let(:test_price) { 10.0 }
     before(:each) do
       subject.default_currency = "US"
@@ -78,7 +78,7 @@ describe BusinessCatalyst::Products::CSVRow do
       end
     end
 
-    it "treats :sell_price, :retail_price, :wholesale_sale_price as currency" do
+    it "treats :sell_price, :recommended_retail_price, :wholesale_sale_price as currency" do
       currency_columns.each do |column|
         subject.should_receive(:number_to_currency).with(test_price).and_return("US/10.00")
         subject.csv_value(column).should eq("US/10.00")
