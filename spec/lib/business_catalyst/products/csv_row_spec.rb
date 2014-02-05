@@ -129,34 +129,34 @@ describe BusinessCatalyst::Products::CSVRow do
     end
   end # currency handling
 
-  describe "catalogue csv_value" do
+  describe "catalog csv_value" do
     it "prepends and joins catalogs with '/'" do
-      subject.stub(:catalogue) { ["A", "B"] }
-      subject.csv_value(:catalogue).should eq("/A/B")
+      subject.stub(:catalog) { ["A", "B"] }
+      subject.csv_value(:catalog).should eq("/A/B")
     end
     it "joins multiple categorizations with ';'" do
-      subject.stub(:catalogue) { [["A", "B"], ["C", "D"]] }
-      subject.csv_value(:catalogue).should eq("/A/B;/C/D")
+      subject.stub(:catalog) { [["A", "B"], ["C", "D"]] }
+      subject.csv_value(:catalog).should eq("/A/B;/C/D")
     end
     it "treats a single string as one catalog" do
-      subject.stub(:catalogue) { "A" }
-      subject.csv_value(:catalogue).should eq("/A")
+      subject.stub(:catalog) { "A" }
+      subject.csv_value(:catalog).should eq("/A")
     end
     it "replaces slashes with a space" do
-      subject.stub(:catalogue) { "One/Two" }
-      subject.csv_value(:catalogue).should eq("/One Two")
+      subject.stub(:catalog) { "One/Two" }
+      subject.csv_value(:catalog).should eq("/One Two")
     end
     it "replaces semi-colons with a space" do
-      subject.stub(:catalogue) { "One;Two" }
-      subject.csv_value(:catalogue).should eq("/One Two")
+      subject.stub(:catalog) { "One;Two" }
+      subject.csv_value(:catalog).should eq("/One Two")
     end
     it "squishes multiple spaces" do
-      subject.stub(:catalogue) { "A  B" }
-      subject.csv_value(:catalogue).should eq("/A B")
+      subject.stub(:catalog) { "A  B" }
+      subject.csv_value(:catalog).should eq("/A B")
     end
     it "converts all whitespace characters to plain old space" do
-      subject.stub(:catalogue) { "A\nB" }
-      subject.csv_value(:catalogue).should eq("/A B")
+      subject.stub(:catalog) { "A\nB" }
+      subject.csv_value(:catalog).should eq("/A B")
     end
   end
 

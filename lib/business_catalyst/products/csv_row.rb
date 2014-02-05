@@ -4,7 +4,7 @@ module BusinessCatalyst
 
     # Subclass and override the methods for columns
     # you need to export. You may return arrays for certain
-    # columns that take multiple values, like catalogue,
+    # columns that take multiple values, like catalog,
     # and true/false for boolean columns.
     #
     # nil will always be interpreted as blank.
@@ -38,7 +38,9 @@ module BusinessCatalyst
     # Later, with a CSV opened for writing:
     #
     #   some_csv << ExportRow.headers
-    #   some_csv << row_instance.to_a
+    #   products.each do |product|
+    #     some_csv << ExportRow.new(product).to_a
+    #   end
     #
     class CSVRow
 
@@ -80,7 +82,7 @@ module BusinessCatalyst
         ["Description", :description],
         ["Small Image", :small_image],
         ["Large Image", :large_image],
-        ["Catalogue", :catalogue, []], # Can be an array of path names, or an array of arrays of path names (multiple catalogs)
+        ["Catalogue", :catalog, []], # Can be an array of path names, or an array of arrays of path names (multiple catalogs)
         ["Sell Price", :sell_price],
         ["Recommended Retail Price", :recommended_retail_price],
         ["Tax Code", :tax_code],
@@ -169,7 +171,7 @@ module BusinessCatalyst
           input ? "Y" : "N"
         end
 
-        def transform_catalogue(input)
+        def transform_catalog(input)
           input = [input] unless input.kind_of?(Array) # ensure at least a 1D array
 
           # convert to array of arrays if not already
