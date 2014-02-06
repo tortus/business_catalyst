@@ -23,7 +23,7 @@ module BusinessCatalyst
     # Just calls to_s on input
     class GenericTransformer < Transformer
       def transform
-        input.to_s
+        input.to_s if input
       end
     end
 

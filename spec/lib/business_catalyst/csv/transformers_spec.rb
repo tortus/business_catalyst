@@ -31,6 +31,9 @@ module BusinessCatalyst::CSV
       input.should_receive(:to_s).and_return("string value")
       subject.transform(input).should eq("string value")
     end
+    it "leaves nil alone" do
+      subject.transform(nil).should be_nil
+    end
   end
 
   describe ArrayTransformer do
