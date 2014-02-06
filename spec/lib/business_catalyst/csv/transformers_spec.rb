@@ -41,6 +41,9 @@ module BusinessCatalyst::CSV
     it "escapes semi-colons by converting to spaces" do
       subject.transform(["A;B", "C"]).should eq("A B;C")
     end
+    it "returns nil when input is nil" do
+      subject.transform(nil).should be_nil
+    end
   end
 
   describe BooleanTransformer do
