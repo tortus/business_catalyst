@@ -44,12 +44,6 @@ module BusinessCatalyst
     #
     class ProductRow < Row
 
-      attr_accessor :default_currency
-
-      def initialize(*args)
-        @default_currency ||= "US"
-      end
-
       def self.columns
         COLUMNS
       end
