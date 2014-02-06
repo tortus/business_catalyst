@@ -69,6 +69,7 @@ module BusinessCatalyst
 
 
     class CurrencyTransformer < Transformer
+      BC_CURRENCY_REGEX = /\A\w+\/\d/.freeze
 
       def self.default_currency
         @default_currency || "US"
@@ -96,7 +97,7 @@ module BusinessCatalyst
 
       def number_to_currency(input)
         if input && (input_s = input.to_s.strip) != ""
-          if input_s =~ /\A\w+\/\d/
+          if input_s =~ BC_CURRENCY_REGEX
             input_s
           else
             "#{currency}/#{input_s}"
