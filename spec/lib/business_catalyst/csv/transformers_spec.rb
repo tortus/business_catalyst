@@ -100,7 +100,7 @@ module BusinessCatalyst::CSV
         input = 10.0
         subject.transform(input).should eq("US/#{input.to_s}")
       end
-      it "prepends #default_currency" do
+      it "prepends CurrencyTransformer.default_currency" do
         input = 10.0
         subject.default_currency = "AU"
         subject.transform(input).should eq("AU/#{input.to_s}")
