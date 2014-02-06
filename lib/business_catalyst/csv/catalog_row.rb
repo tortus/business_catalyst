@@ -3,7 +3,7 @@ module BusinessCatalyst
     class CatalogRow < Row
 
       COLUMNS = [
-        ["Catalog Name/Heirarchy", :catalog_name_hierarchy],
+        ["Catalog Name/Heirarchy", :catalog_name_hierarchy, nil, CatalogTransformer],
         ["Description", :description],
         ["Image", :image],
         ["Weighting", :weighting],
