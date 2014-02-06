@@ -1,5 +1,5 @@
 require 'spec_helper'
 
 describe BusinessCatalyst::CSV::CatalogRow do
-  pending
+  subject { BusinessCatalyst::CSV::CatalogRow.new }
 end
