@@ -81,7 +81,7 @@ module BusinessCatalyst
         ["Custom 2", :custom_2],
         ["Custom 3", :custom_3],
         ["Custom 4", :custom_4],
-        ["Poplets", :poplets],
+        ["Poplets", :poplets, [], ArrayTransformer],
         ["Enabled", :enabled?, true, BooleanTransformer],
         ["Capture Details", :capture_details?, false, BooleanTransformer],
         ["Limit Download Count", :limit_download_count],
