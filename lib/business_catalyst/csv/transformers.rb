@@ -56,13 +56,13 @@ module BusinessCatalyst
 
         normalized_input.map { |catalog_names|
           if catalog_names.any?
-            sanitized_names = catalog_names.map { |name| sanitize_catalog_name(name) }
+            sanitized_names = catalog_names.map { |name| self.class.sanitize_catalog_name(name) }
             "/" + sanitized_names.join("/")
           end
         }.join(";")
       end
 
-      def sanitize_catalog_name(name)
+      def self.sanitize_catalog_name(name)
         name.strip.gsub(/[\/;,#\?:@="\|\._]/, " ").gsub('&', 'and').gsub(/\s+/, " ") if name
       end
     end
