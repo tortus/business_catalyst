@@ -63,7 +63,7 @@ module BusinessCatalyst
       end
 
       def sanitize_catalog_name(name)
-        name.strip.gsub(/[\/;,#\?:@="\|\._]/, " ").gsub(/\s+/, " ") if name
+        name.strip.gsub(/[\/;,#\?:@="\|\._]/, " ").gsub('&', 'and').gsub(/\s+/, " ") if name
       end
     end
 
