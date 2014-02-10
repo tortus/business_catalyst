@@ -57,7 +57,7 @@ module BusinessCatalyst
         normalized_input.map { |catalog_names|
           if catalog_names.any?
             sanitized_names = catalog_names.map { |name|
-              BusinessCatalyst.sanitize_catalog_name(name, :replace_with => " ", :ampersand_as => "and", :squish => true)
+              BusinessCatalyst.sanitize_catalog_name(name)
             }
             "/" + sanitized_names.join("/")
           end
