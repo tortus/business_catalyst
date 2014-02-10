@@ -2,9 +2,8 @@
 module BusinessCatalyst
   module CSV
 
-    # Subclass and override the methods for columns
-    # you need to export. You may return arrays for certain
-    # columns that take multiple values, like catalog,
+    # Subclass and call #map to set values for columns. You may return
+    # arrays for columns that take multiple values, like catalog,
     # and true/false for boolean columns.
     #
     # nil will always be interpreted as blank.
@@ -12,34 +11,32 @@ module BusinessCatalyst
     # == What method name to use?
     #
     # Refer to the COLUMNS constant, but in general use the
-    # underscored name of the column, with slashes replaced by 'or',
-    # and '?' appended to columns that expect a boolean.
+    # underscored name of the column, with '?' appended to columns
+    # that expect a boolean.
     #
     # == Example
     #
-    #   class ExportRow < BusinessCatalyst::CSV::ProductRow
+    #   class MyRow < BusinessCatalyst::CSV::ProductRow
     #
     #     def initialize(product)
     #       @product = product
     #       super
     #     end
     #
-    #     map :product_code do
-    #       @product.code
-    #     end
-    #
-    #     map :inventory_control? do
-    #       false
-    #     end
+    #     map(:product_code) { @product.code }
+    #     map(:name)         { @product.name }
+    #     map(:catalog)      { ["Some", "Accessories"] }
+    #     map(:enabled?)     { @product.active }
+    #     map(:inventory_control?) { false }
     #
     #     # ... (other properties here)
     #   end
     #
     # Later, with a CSV opened for writing:
     #
-    #   some_csv << ExportRow.headers
+    #   csv << MyRow.headers
     #   products.each do |product|
-    #     some_csv << ExportRow.new(product).to_a
+    #     csv << MyRow.new(product).to_a
     #   end
     #
     class ProductRow < Row
