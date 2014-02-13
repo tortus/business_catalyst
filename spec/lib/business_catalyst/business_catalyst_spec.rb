@@ -1,3 +1,4 @@
+# encoding: utf-8
 require 'spec_helper'
 
 describe BusinessCatalyst do
@@ -21,6 +22,9 @@ describe BusinessCatalyst do
     end
     it "downcases input" do
       subject.seo_friendly_url("A B").should eq("a-b")
+    end
+    it "strips random unicode characters" do
+      subject.seo_friendly_url("test”®").should eq("test")
     end
   end
 
