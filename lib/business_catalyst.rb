@@ -36,7 +36,7 @@ module BusinessCatalyst
   # downcases, and converts whitespace to '-'. Does NOT append numbers to ensure uniqueness, you
   # must do this yourself after conversion!
   def self.seo_friendly_url(name)
-    name.strip.downcase.gsub(ALL_BAD_SEO_CHARS, "").gsub(/\s+/, "-").gsub(/-{2,}/, "-").gsub(/\A-+|-+\Z/, "")
+    name.strip.downcase.gsub(/[^\d\w\s\-]/, "").gsub(/[\s_]+/, "-").gsub(/-{2,}/, "-").gsub(/\A-+|-+\Z/, "")
   end
 
 end
