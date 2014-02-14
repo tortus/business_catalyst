@@ -85,9 +85,6 @@ module BusinessCatalyst::CSV
     it "converts all whitespace characters to single space" do
       subject.transform("A\n\nB").should eq("/A B")
     end
-    it "converts & to 'and'" do
-      subject.transform("A & B").should eq("/A and B")
-    end
   end
 
   describe CurrencyTransformer do

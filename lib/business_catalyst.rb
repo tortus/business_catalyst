@@ -7,28 +7,16 @@ require "business_catalyst/csv/catalog_row"
 
 module BusinessCatalyst
 
-  # Characters that will break a catalog import.
-  CATALOG_CHAR_BLACKLIST = /[\/;&]/.freeze
+  # The following characters cause an error message if they appear in a catalog name.
+  CATALOG_CHAR_BLACKLIST = /[\\\/;&,#:"\|\._@=\?]/.freeze
 
-  # Characters that won't cause an error but are bad for SEO.
-  CATALOG_CHAR_GREYLIST = /[,#:"\|\._@=\?\(\)]/.freeze
-
-  # Combination of blacklist and greylist
-  ALL_BAD_SEO_CHARS = /[\/;&,#:"\|\._@=\?\(\)]/.freeze
-
-  def self.sanitize_catalog_name(name, options = {})
+  # Strip all characters out of a catalog name that will cause an error. Replaces them with
+  # " " and then squishes all whitespace to single space to preserve word structure.
+  def self.sanitize_catalog_name(name)
     return name if name.nil?
-
-    replace_with = options.fetch(:replace_with) { " " }
-    escape_greylist = options.fetch(:escape_greylist) { false }
-    ampersand_as = options.fetch(:ampersand_as) { "and" }
-    squish = options.fetch(:squish) { true }
-
     sanitized = name.strip
-    sanitized.gsub!("&", ampersand_as)
-    sanitized.gsub!(CATALOG_CHAR_GREYLIST, replace_with) if escape_greylist
-    sanitized.gsub!(CATALOG_CHAR_BLACKLIST, replace_with)
-    sanitized.gsub!(/\s+/, " ") if squish
+    sanitized.gsub!(CATALOG_CHAR_BLACKLIST, " ")
+    sanitized.gsub!(/\s+/, " ")
     sanitized
   end
 
