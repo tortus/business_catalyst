@@ -27,7 +27,7 @@ module BusinessCatalyst
   # consecutive dashes and leading and trailing dashes. Does NOT append
   # numbers to ensure uniqueness, you must do this yourself after conversion.
   def self.seo_friendly_url(name)
-    name.strip.downcase.gsub(/[^a-z0-9\s\-]/, "-").gsub(/-{2,}/, "-").gsub(/\A-+|-+\Z/, "")
+    name.strip.downcase.gsub(/[^a-z0-9\-]/, "-").gsub(/-{2,}/, "-").gsub(/\A-+|-+\Z/, "")
   end
 
 end
