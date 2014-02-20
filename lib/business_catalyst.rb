@@ -23,7 +23,8 @@ module BusinessCatalyst
   # A guess as to how business catalyst converts names to URL's, based on this blog entry:
   # http://www.businesscatalyst.com/bc-blog/seo-friendly-urls-for-products-and-catalogs
   #
-  # Downcases, and converts invalid characters and whitespace to '-'. Does NOT append
+  # Downcases, converts invalid characters and whitespace to '-', and finally removes multiple
+  # consecutive dashes and leading and trailing dashes. Does NOT append
   # numbers to ensure uniqueness, you must do this yourself after conversion.
   def self.seo_friendly_url(name)
     name.strip.downcase.gsub(/[^a-z0-9\s\-]/, "-").gsub(/-{2,}/, "-").gsub(/\A-+|-+\Z/, "")
