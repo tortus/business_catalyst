@@ -5,8 +5,11 @@ describe BusinessCatalyst do
   subject { BusinessCatalyst }
 
   describe "#seo_friendly_url" do
-    it "replaces bad SEO chars with empty string" do
-      subject.seo_friendly_url("/;&,#:\"|._@=?()").should eq("")
+    it "replaces bad SEO chars with '-'" do
+      subject.seo_friendly_url("a&b").should eq("a-b")
+    end
+    it "replaces multiple consecutive bad SEO chars with single '-'" do
+      subject.seo_friendly_url("a/;&,#:\"|._@=?()b").should eq("a-b")
     end
     it "replaces whitespace with '-'" do
       subject.seo_friendly_url("a  b").should eq("a-b")
