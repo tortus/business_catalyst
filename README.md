@@ -25,6 +25,17 @@ underscored version of the BC column name, with '?' appended for
 boolean columns. The COLUMNS constant in the base class has the complete
 list, and I recommend referring to it extensively.)
 
+In general, you can define your methods to return Ruby types such as Array,
+BigDecimal, True/False, etc., and the gem will turn it into the correct
+text for Business Catalyst for you, and handle all escaping.
+
+### Array example:
+
+```ruby
+map(:catalog) { ["Value1", "Value2"] }
+# becomes: "Value1;Value"
+```
+
 ### Building a Product CSV
 
 ```ruby
