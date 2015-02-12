@@ -60,13 +60,14 @@ and the gem will turn it into the correct text for Business Catalyst for you,
 and handle all escaping.
 
 ```ruby
-# array:
-map(:catalog) { ["Value1", "Value2"] }
-# becomes: "Value1;Value2"
+# Array:
+map(:catalog) { ["Value1", "Value2"] } # becomes: "Value1;Value2"
 
-# price:
-map(:sell_price) { 10.0 }
-# becomes: "US/10.0"
+# Numeric:
+map(:sell_price) { 10.0 } # becomes: "US/10.0"
+
+# boolean:
+map(:enabled?) { true } # becomes: "Y"
 ```
 
 ## Contributing
