@@ -30,6 +30,8 @@ list, and I recommend referring to it extensively.)
 ```ruby
 class MyRow < BusinessCatalyst::CSV::ProductRow
 
+  default_currency "US" # optional, US is already the default
+
   def initialize(product)
     @product = product
     super
