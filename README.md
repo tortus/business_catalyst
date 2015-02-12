@@ -33,7 +33,7 @@ text for Business Catalyst for you, and handle all escaping.
 
 ```ruby
 map(:catalog) { ["Value1", "Value2"] }
-# becomes: "Value1;Value"
+# becomes: "Value1;Value2"
 ```
 
 ### Building a Product CSV
