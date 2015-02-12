@@ -25,17 +25,6 @@ underscored version of the BC column name, with '?' appended for
 boolean columns. The COLUMNS constant in the base class has the complete
 list, and I recommend referring to it extensively.)
 
-In general, you can define your methods to return Ruby types such as Array,
-BigDecimal, True/False, etc., and the gem will turn it into the correct
-text for Business Catalyst for you, and handle all escaping.
-
-### Array example:
-
-```ruby
-map(:catalog) { ["Value1", "Value2"] }
-# becomes: "Value1;Value2"
-```
-
 ### Building a Product CSV
 
 ```ruby
@@ -61,6 +50,23 @@ csv << MyRow.headers
 products.each do |product|
   csv << MyRow.new(product).to_a
 end
+```
+
+### Returning Ruby data types in your methods
+
+In general, you can define your methods to return Ruby types such as Array,
+Float (try to use BigDecimal or FixNum for currency though), True/False, etc.,
+and the gem will turn it into the correct text for Business Catalyst for you,
+and handle all escaping.
+
+```ruby
+# array:
+map(:catalog) { ["Value1", "Value2"] }
+# becomes: "Value1;Value2"
+
+# price:
+map(:sell_price) { 10.0 }
+# becomes: "US/10.0"
 ```
 
 ## Contributing
