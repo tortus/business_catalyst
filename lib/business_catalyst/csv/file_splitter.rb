@@ -19,6 +19,13 @@ module BusinessCatalyst
     #       end
     #     end
     #
+    # If you want to watch for when a new file is opened and maybe
+    # do some logging, you can use the #on_file_change method:
+    #
+    #     splitter.on_file_change do |splitter|
+    #       puts "opened #{splitter.current_file.path}"
+    #     end
+    #
     class FileSplitter
 
       attr_accessor :base_name, :max_rows_per_file, :header_row, :verbose, :logger
