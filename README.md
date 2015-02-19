@@ -72,6 +72,24 @@ map(:sell_price) { 10.0 } # becomes: "US/10.0"
 map(:enabled?) { true } # becomes: "Y"
 ```
 
+### If you have more than 10k product rows to import, use BusinessCatalyst::CSV::FileSplitter
+
+Business Catalyst limits the number of products you can import in a single
+CSV to 10000. However, you can get around this limit by importing multiple
+files. We have a class to help!
+
+```ruby
+# Simplest usage, assuming we already have some products to export:
+splitter = BusinessCatalyst::CSV::FileSplitter.new("output_base_name.csv", header_row: MyRow.headers)
+splitter.start do |splitter|
+  product_rows.each do |row|
+    splitter.start_row
+    splitter.current_file << row.to_a
+  end
+end
+```
+See the class definition for all available options.
+
 ## Contributing
 
 1. Fork it
