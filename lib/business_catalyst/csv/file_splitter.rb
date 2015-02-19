@@ -58,6 +58,10 @@ module BusinessCatalyst
         end
       end
 
+      def on_file_change(&block)
+        @on_file_change = Proc.new(&block)
+      end
+
       def close
         current_file.close if current_file
       end
@@ -72,6 +76,17 @@ module BusinessCatalyst
         @current_file = ::CSV.open(new_file_name, 'wb')
         if header_row
           @current_file << header_row
+        end
+        trigger_on_file_change
+      end
+
+      def trigger_on_file_change
+        if @on_file_change.kind_of?(Proc)
+          if @on_file_change.arity >= 1
+            @on_file_change.call(self)
+          else
+            @on_file_change.call
+          end
         end
       end
 

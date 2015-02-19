@@ -73,6 +73,20 @@ module BusinessCatalyst
             end
             expect(line).to eq("Column 1,Column 2\n")
           end
+          it "calls a block provided to #on_file_change" do
+            it_works = false
+            subject.on_file_change do
+              it_works = true
+            end
+            subject.start_row
+            expect(it_works).to eq(true)
+          end
+          it "calls a block provided to #on_file_change with itself, if block arity is 1 or more" do
+            subject.on_file_change do |s|
+              expect(s).to eq(subject)
+            end
+            subject.start_row
+          end
         end
       end
 
