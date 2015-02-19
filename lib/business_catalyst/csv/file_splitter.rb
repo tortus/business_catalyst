@@ -24,11 +24,12 @@ module BusinessCatalyst
       attr_accessor :base_name, :max_rows_per_file, :header_row, :verbose, :logger
       attr_reader :current_row, :total_rows, :current_file, :all_files
 
-      def initialize(base_name, max_rows_per_file: 10_000, header_row: nil, verbose: false)
+      def initialize(base_name, options = {})
         @base_name = base_name
-        @max_rows_per_file = max_rows_per_file
-        @header_row = header_row
-        @verbose = verbose
+        @max_rows_per_file = options.fetch(:max_rows_per_file) { 10_000 }
+        @header_row = options.fetch(:header_row) { nil }
+        @verbose = options.fetch(:verbose) { false }
+        @logger = options.fetch(:logger) { nil }
 
         @current_row = 0
         @total_rows = 0

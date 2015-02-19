@@ -5,11 +5,12 @@ module BusinessCatalyst
   module CSV
     describe FileSplitter do
       subject {
-        FileSplitter.new("test.csv", max_rows_per_file: 10, header_row: ["Column 1"], verbose: false)
+        FileSplitter.new("test.csv", :max_rows_per_file => 10, :header_row => ["Column 1"], :verbose => false, :logger => nil)
       }
 
       after(:each) do
         # cleanup any files generated
+
         begin
           subject.close
         rescue IOError
