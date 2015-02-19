@@ -22,13 +22,21 @@ module BusinessCatalyst
         end
       end
 
+      def get_csv_writer_path(writer)
+        if RUBY_VERSION =~ /^1\.8/
+          writer.send(:instance_variable_get, :@dev).path
+        else
+          writer.path
+        end
+      end
+
       describe "#start" do
         it "yields self" do
           expect {|b| subject.start(&b) }.to yield_control.once
         end
         it "opens a new file with the new row range appended" do
           subject.start do |splitter|
-            expect(splitter.current_file.path).to eq("test_rows_1-10.csv")
+            expect(get_csv_writer_path(splitter.current_file)).to eq("test_rows_1-10.csv")
           end
         end
       end
@@ -57,7 +65,7 @@ module BusinessCatalyst
           end
           it "opens a new file with the new row range appended" do
             subject.start_row
-            expect(subject.current_file.path).to eq("test_rows_11-20.csv")
+            expect(get_csv_writer_path(subject.current_file)).to eq("test_rows_11-20.csv")
           end
           it "appends the new file name to #all_files" do
             subject.start_row
@@ -66,7 +74,7 @@ module BusinessCatalyst
           it "prepends the header row to the new file" do
             subject.header_row = ["Column 1", "Column 2"]
             subject.start_row
-            file = subject.current_file.path
+            file = get_csv_writer_path(subject.current_file)
             subject.close
             line = File.open(file, 'r') do |f|
               f.readline
