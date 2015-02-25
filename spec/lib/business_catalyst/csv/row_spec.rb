@@ -35,7 +35,7 @@ describe BusinessCatalyst::CSV::Row do
         before { subject.stub(:columns) { [["Name", :name]] } }
         it "turns the provided block into a method of the same name" do
           subject.map(:name) { :test }
-          subject.method_defined?(:name).should be_true
+          subject.method_defined?(:name).should be_truthy
           subject.new.name.should eq(:test)
         end
       end
