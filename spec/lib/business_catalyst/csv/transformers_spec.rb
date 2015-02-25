@@ -138,4 +138,35 @@ module BusinessCatalyst::CSV
     end
   end
 
+  describe TemplateIDTransformer do
+    subject { TemplateIDTransformer }
+
+    context "with symbol" do
+      it "converts :default to 0" do
+        subject.transform(:default).should eq(0)
+      end
+      it "converts :none to -1" do
+        subject.transform(:none).should eq(-1)
+      end
+      it "converts :parent to -2" do
+        subject.transform(:parent).should eq(-2)
+      end
+      it "raises an error for any symbol other than :none and :parent" do
+        expect { subject.transform(:test) }.to raise_error(InvalidInputError)
+      end
+    end
+
+    context "with string" do
+      it "does nothing" do
+        subject.transform("1234").should eq("1234")
+      end
+    end
+
+    context "with integer" do
+      it "does nothing" do
+        subject.transform(1234).should eq(1234)
+      end
+    end
+  end
+
 end

@@ -9,7 +9,7 @@ module BusinessCatalyst
         ["Weighting", :weighting],
         ["Release Date", :release_date],
         ["Expiry Date", :expiration_date],
-        ["Template ID", :template_id],
+        ["Template ID", :template_id, 0, TemplateIDTransformer],
         ["Enabled", :enabled?, true, BooleanTransformer],
         ["Enable XML Feed", :enable_xml_feed?, false, BooleanTransformer],
         ["Show Product Prices", :show_product_prices?, true, BooleanTransformer],

@@ -2,6 +2,9 @@
 module BusinessCatalyst
   module CSV
 
+    class InvalidInputError < StandardError
+    end
+
 
     class Transformer
       attr_accessor :input
@@ -108,6 +111,24 @@ module BusinessCatalyst
       end
     end
 
+    class TemplateIDTransformer < Transformer
+      def transform
+        if input.kind_of?(Symbol)
+          case input
+          when :default
+            0
+          when :none
+            -1
+          when :parent
+            -2
+          else
+            raise InvalidInputError, "#{input} is not a valid template ID"
+          end
+        else
+          input
+        end
+      end
+    end
 
   end
 end
