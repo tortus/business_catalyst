@@ -85,7 +85,7 @@ module BusinessCatalyst
         ["Limit Download IP", :limit_download_ip],
         ["On Sale", :on_sale?, false, BooleanTransformer],
         ["Hide if Out of Stock", :hide_if_out_of_stock?, false, BooleanTransformer],
-        ["Attributes", :attributes],
+        ["Attributes", :attributes, nil, ProductAttributesTransformer],
         ["Gift Voucher", :gift_voucher?, false, BooleanTransformer],
         ["Drop Shipping", :drop_shipping?, false, BooleanTransformer],
         ["Product Height", :product_height],

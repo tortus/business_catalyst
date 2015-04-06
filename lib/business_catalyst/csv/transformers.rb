@@ -1,27 +1,9 @@
 # encoding: utf-8
+require 'business_catalyst/csv/transformers/transformer'
+require 'business_catalyst/csv/transformers/product_attributes_transformer'
+
 module BusinessCatalyst
   module CSV
-
-    class InvalidInputError < StandardError
-    end
-
-
-    class Transformer
-      attr_accessor :input
-
-      def initialize(input)
-        @input = input
-      end
-
-      def transform
-        raise NotImplementedError, "Transformer subclasses must implement #transform"
-      end
-
-      def self.transform(input)
-        self.new(input).transform
-      end
-    end
-
 
     # Just calls to_s on input
     class GenericTransformer < Transformer

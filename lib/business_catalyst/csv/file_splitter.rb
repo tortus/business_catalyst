@@ -31,6 +31,8 @@ module BusinessCatalyst
       attr_accessor :base_name, :max_rows_per_file, :header_row, :verbose, :logger
       attr_reader :current_row, :total_rows, :current_file, :all_files
 
+      alias_method :file_names, :all_files
+
       def initialize(base_name, options = {})
         @base_name = base_name
         @max_rows_per_file = options.fetch(:max_rows_per_file) { 10_000 }
