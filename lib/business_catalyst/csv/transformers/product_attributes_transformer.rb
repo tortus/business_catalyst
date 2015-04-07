@@ -14,7 +14,7 @@ module BusinessCatalyst
           attributes.map {|attribute|
             name        = BusinessCatalyst.sanitize_catalog_name(attribute.name)
             required    = attribute.required ? '*' : ''
-            display_as  = convert_display_as(attribute.display_as)
+            display_as  = attribute.display_as
             keep_stock  = BooleanTransformer.transform(attribute.keep_stock)
 
             text = ["#{name}#{required}", display_as, keep_stock].join("|")
@@ -37,19 +37,6 @@ module BusinessCatalyst
           input
         else
           [input]
-        end
-      end
-
-      def convert_display_as(value)
-        case value
-        when :dropdown
-          5
-        when :checkbox
-          6
-        when :radio
-          7
-        else
-          value.to_i
         end
       end
 
