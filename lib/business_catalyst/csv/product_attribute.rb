@@ -28,6 +28,24 @@ module BusinessCatalyst
         option
       end
 
+      def add_options(*args)
+        if args.length > 1
+          options = args
+        else
+          options = args.first
+        end
+        options.each do |option|
+          if option.kind_of?(Hash)
+            name = option.fetch(:name)
+            image = option.fetch(:image, nil)
+            price = option.fetch(:price, nil)
+          else
+            name, image, price = *option
+          end
+          add_option(name, image, price)
+        end
+      end
+
       private
 
       def normalize_display_as(display_as)
