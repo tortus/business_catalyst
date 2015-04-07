@@ -3,18 +3,6 @@ require 'spec_helper'
 
 module BusinessCatalyst
   module CSV
-    describe ProductAttribute do
-      it "raises ArgumentError when display_as is invalid symbol" do
-        expect {
-          ProductAttribute.new("Test", :invalid, false, false)
-        }.to raise_error(ArgumentError)
-      end
-      it "raises ArgumentError when display_as is invalid integer" do
-        expect {
-          ProductAttribute.new("Test", -1, false, false)
-        }.to raise_error(ArgumentError)
-      end
-    end
 
     # Example: Chain*|5|N:Rope Chain||US/0,Box Chain||US/5,Snake Chain||US/5;Length*|5|N:16 inch||US/0,18 inch||US/0,20 inch||US/0,24 inch||US/0
     describe ProductAttributesTransformer do
