@@ -10,7 +10,7 @@ module BusinessCatalyst
       def transform
         if input.kind_of?(String)
           input
-        else
+        elsif input
           attributes.map {|attribute|
             name        = BusinessCatalyst.sanitize_catalog_name(attribute.name)
             required    = attribute.required ? '*' : ''
@@ -34,9 +34,9 @@ module BusinessCatalyst
 
       def attributes
         if input.kind_of?(Array)
-          input
+          input.compact
         else
-          [input]
+          [input].compact
         end
       end
 

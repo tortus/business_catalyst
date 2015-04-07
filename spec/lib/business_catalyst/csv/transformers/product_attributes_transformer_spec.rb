@@ -12,6 +12,10 @@ module BusinessCatalyst
         CurrencyTransformer.default_currency = "US"
       end
 
+      it "returns nil for nil input" do
+        expect(subject.transform(nil)).to eq(nil)
+      end
+
       it "turns Attribute object graph into BC string" do
         chain = ProductAttribute.new("Chain", 5, false, false)
         chain.add_option("Rope Chain", "image1", 5)
