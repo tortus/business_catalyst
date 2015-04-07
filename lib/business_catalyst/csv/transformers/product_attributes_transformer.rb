@@ -14,7 +14,7 @@ module BusinessCatalyst
           attributes.map {|attribute|
             name        = BusinessCatalyst.sanitize_catalog_name(attribute.name)
             required    = attribute.required ? '*' : ''
-            display_as  = attribute.display_as
+            display_as  = attribute.display_as.to_i
             keep_stock  = BooleanTransformer.transform(attribute.keep_stock)
 
             text = ["#{name}#{required}", display_as, keep_stock].join("|")
@@ -22,7 +22,7 @@ module BusinessCatalyst
 
             text << attribute.options.map {|option|
               name  = BusinessCatalyst.sanitize_catalog_name(option.name.to_s)
-              image = option.image.to_s
+              image = option.image.to_s.strip
               price = CurrencyTransformer.transform(option.price)
               [name, image, price].join("|")
             }.join(",")

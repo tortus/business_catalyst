@@ -46,6 +46,24 @@ module BusinessCatalyst
         expect(subject.transform(chain)).to eq("Chain|5|N:Rope Chain|image1|US/5")
       end
 
+      it "retains the double '|' around blank images" do
+        chain = ProductAttribute.new("Chain", :dropdown, false, false)
+        chain.add_option("Rope Chain", nil, 5)
+        expect(subject.transform(chain)).to eq("Chain|5|N:Rope Chain||US/5")
+      end
+
+      it "strips whitespace from around images" do
+        chain = ProductAttribute.new("Chain", :dropdown, false, false)
+        chain.add_option("Rope Chain", " asdf ", 5)
+        expect(subject.transform(chain)).to eq("Chain|5|N:Rope Chain|asdf|US/5")
+      end
+
+      it "strips whitespace from around names" do
+        chain = ProductAttribute.new(" Chain ", :dropdown, false, false)
+        chain.add_option(" Rope Chain ", nil, 5)
+        expect(subject.transform(chain)).to eq("Chain|5|N:Rope Chain||US/5")
+      end
+
       it "does nothing to Strings" do
         expect(subject.transform("ASDF")).to eq("ASDF")
       end
