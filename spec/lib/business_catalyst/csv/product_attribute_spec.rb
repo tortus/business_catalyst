@@ -37,6 +37,11 @@ module BusinessCatalyst
           attribute.add_options([{:name => "Opt1", :image => "img", :price => 1}])
           expect(attribute.options).to eq([ProductAttribute::Option.new("Opt1", "img", 1)])
         end
+        it "does nothing to raw ProductAttribute::Option objects" do
+          attribute = ProductAttribute.new("Test", :dropdown, false, false)
+          attribute.add_options([ProductAttribute::Option.new("Opt1", "img", 1)])
+          expect(attribute.options).to eq([ProductAttribute::Option.new("Opt1", "img", 1)])
+        end
       end
 
     end

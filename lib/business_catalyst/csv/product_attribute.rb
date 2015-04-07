@@ -22,8 +22,13 @@ module BusinessCatalyst
         @options ||= []
       end
 
-      def add_option(name, image, price)
-        option = Option.new(name, image, price)
+      def add_option(*args)
+        if args.first.kind_of?(Option)
+          option = args.first
+        else
+          name, image, price = *args
+          option = Option.new(name, image, price)
+        end
         options << option
         option
       end
@@ -39,10 +44,18 @@ module BusinessCatalyst
             name = option.fetch(:name)
             image = option.fetch(:image, nil)
             price = option.fetch(:price, nil)
-          else
+            add_option(name, image, price)
+
+          elsif option.kind_of?(Array)
             name, image, price = *option
+            add_option(name, image, price)
+
+          elsif option.kind_of?(Option)
+            add_option(option)
+
+          else
+            raise ArgumentError, "#{option} is not a valid ProductAttribute::Option"
           end
-          add_option(name, image, price)
         end
       end
 
