@@ -2,16 +2,20 @@
 module BusinessCatalyst
   module CSV
 
-    ProductAttribute = Struct.new(:name, :display_as, :required, :keep_stock) do
+    class ProductAttribute
       Option = Struct.new(:name, :image, :price)
 
+      attr_accessor :name, :display_as, :required, :keep_stock
+
       def initialize(name, display_as = nil, required = false, keep_stock = false)
-        display_as = normalize_display_as(display_as)
-        super(name, display_as, required, keep_stock)
+        @name = name
+        self.display_as = display_as
+        @required = required
+        @keep_stock = keep_stock
       end
 
       def display_as=(value)
-        super(normalize_display_as(value))
+        @display_as = normalize_display_as(value)
       end
 
       def options
