@@ -8,21 +8,28 @@ module BusinessCatalyst
     class ProductAttributesTransformer < Transformer
 
       def transform
-        attributes.map {|attribute|
-          name        = attribute.name
-          required    = attribute.required ? '*' : ''
-          display_as  = convert_display_as(attribute.display_as)
-          keep_stock  = BooleanTransformer.transform(attribute.keep_stock)
+        if input.kind_of?(String)
+          input
+        else
+          attributes.map {|attribute|
+            name        = BusinessCatalyst.sanitize_catalog_name(attribute.name)
+            required    = attribute.required ? '*' : ''
+            display_as  = convert_display_as(attribute.display_as)
+            keep_stock  = BooleanTransformer.transform(attribute.keep_stock)
 
-          text = ["#{name}#{required}", display_as, keep_stock].join("|")
-          text << ":"
+            text = ["#{name}#{required}", display_as, keep_stock].join("|")
+            text << ":"
 
-          text << attribute.options.map {|option|
-            [ option.name.to_s, option.image.to_s, CurrencyTransformer.transform(option.price) ].join("|")
-          }.join(",")
+            text << attribute.options.map {|option|
+              name  = BusinessCatalyst.sanitize_catalog_name(option.name.to_s)
+              image = option.image.to_s
+              price = CurrencyTransformer.transform(option.price)
+              [name, image, price].join("|")
+            }.join(",")
 
-          text
-        }.join(";")
+            text
+          }.join(";")
+        end
       end
 
       def attributes

@@ -45,6 +45,10 @@ module BusinessCatalyst
         chain.add_option("Rope Chain", "image1", 5)
         expect(subject.transform(chain)).to eq("Chain|5|N:Rope Chain|image1|US/5")
       end
+
+      it "does nothing to Strings" do
+        expect(subject.transform("ASDF")).to eq("ASDF")
+      end
     end
   end
 end
