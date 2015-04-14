@@ -11,6 +11,10 @@ module BusinessCatalyst
         super(input)
       end
 
+      def transform
+        input.to_s
+      end
+
     end
 
   end
