@@ -47,7 +47,7 @@ module BusinessCatalyst
 
       # [Header, method, default, transformer]
       COLUMNS = [
-        ["Product Code", :product_code],
+        ["Product Code", :product_code, nil, ProductCodeTransformer],
         ["Name", :name],
         ["Description", :description],
         ["Small Image", :small_image],

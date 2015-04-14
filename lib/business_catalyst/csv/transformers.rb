@@ -4,6 +4,7 @@ require 'business_catalyst/csv/transformers/transformer'
 require 'business_catalyst/csv/transformers/catalog_transformer'
 require 'business_catalyst/csv/transformers/currency_transformer'
 require 'business_catalyst/csv/transformers/product_attributes_transformer'
+require 'business_catalyst/csv/transformers/product_code_transformer'
 
 module BusinessCatalyst
   module CSV

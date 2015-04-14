@@ -23,8 +23,16 @@ module BusinessCatalyst
       end
 
       def add_option(*args)
-        if args.first.kind_of?(Option)
-          option = args.first
+        option = nil
+        if args.length == 1
+          arg = args.first
+          if arg.kind_of?(Option)
+            option = arg
+          elsif arg.kind_of?(Hash)
+            option = Option.new(arg.fetch(:name), arg.fetch(:image, nil), arg.fetch(:price, nil))
+          else
+            raise ArgumentError, "unrecognized argument: #{arg.inspect}"
+          end
         else
           name, image, price = *args
           option = Option.new(name, image, price)
@@ -41,6 +49,7 @@ module BusinessCatalyst
         else
           raise ArgumentError, "options must be an Array of ProductAttribute::Option"
         end
+
         options.each do |option|
           if option.kind_of?(Hash)
             name = option.fetch(:name)
