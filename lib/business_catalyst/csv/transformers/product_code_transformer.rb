@@ -6,7 +6,7 @@ module BusinessCatalyst
 
       def initialize(input)
         if input.blank?
-          raise ArgumentError, "product code must not be blank"
+          raise InvalidInputError, "product_code must not be blank"
         end
         super(input)
       end
