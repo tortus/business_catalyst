@@ -15,7 +15,7 @@ module BusinessCatalyst
       end
 
       def display_as=(value)
-        @display_as = normalize_display_as(value)
+        @display_as = self.class.normalize_display_as(value)
       end
 
       def options
@@ -59,9 +59,14 @@ module BusinessCatalyst
         end
       end
 
-      private
-
-      def normalize_display_as(display_as)
+      # Convert display_as to integer for BC, raises ArgumentError
+      # if input cannot be mapped to a valid integer. The following
+      # symbols are accepted:
+      #
+      # * :dropdown = 5
+      # * :checkbox = 6
+      # * :radio    = 7
+      def self.normalize_display_as(display_as)
         if display_as.kind_of?(Symbol)
           case display_as
           when :dropdown
