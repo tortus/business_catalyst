@@ -49,7 +49,7 @@ module BusinessCatalyst
 
       def start
         begin
-          increment_file(1, max_rows_per_file) # will be of by one unless we set manually
+          increment_file(1, max_rows_per_file) # will be off by one unless we set manually
           yield self
         ensure
           close

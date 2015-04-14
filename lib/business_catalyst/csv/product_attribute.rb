@@ -36,8 +36,10 @@ module BusinessCatalyst
       def add_options(*args)
         if args.length > 1
           options = args
-        else
+        elsif args.first.respond_to?(:each)
           options = args.first
+        else
+          raise ArgumentError, "options must be an Array of ProductAttribute::Option"
         end
         options.each do |option|
           if option.kind_of?(Hash)

@@ -2,10 +2,6 @@
 module BusinessCatalyst
   module CSV
 
-    class InvalidInputError < StandardError
-    end
-
-
     class Transformer
       attr_accessor :input
 

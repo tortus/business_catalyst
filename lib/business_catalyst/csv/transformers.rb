@@ -1,4 +1,5 @@
 # encoding: utf-8
+require 'business_catalyst/csv/transformers/invalid_input_error'
 require 'business_catalyst/csv/transformers/transformer'
 require 'business_catalyst/csv/transformers/catalog_transformer'
 require 'business_catalyst/csv/transformers/currency_transformer'
