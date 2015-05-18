@@ -10,7 +10,7 @@ require "business_catalyst/csv/file_splitter"
 module BusinessCatalyst
 
   # The following characters cause an error message if they appear in a catalog name.
-  CATALOG_CHAR_BLACKLIST = /[\\\/;,#:"\|_@=\?]/.freeze
+  CATALOG_CHAR_BLACKLIST = /[\\\/;#:"\|_@=\?]/.freeze
   MORE_STRICT_BLACKLIST = /[\\\/;&,#:"\|\._@=\?]/.freeze
 
   # Strip all characters out of a catalog name that will cause an error. Replaces them with
