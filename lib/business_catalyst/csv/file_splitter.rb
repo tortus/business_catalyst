@@ -11,7 +11,7 @@ module BusinessCatalyst
     # == Usage
     #
     #     headers = MyRowClass.headers
-    #     splitter = FileSplitter.new("output_base_name.csv", max_rows_per_file: 10_000, header_row: headers)
+    #     splitter = FileSplitter.new("output_base_name", max_rows_per_file: 10_000, header_row: headers)
     #     splitter.start do |splitter|
     #       product_rows.each do |row|
     #         splitter.start_row
@@ -99,14 +99,14 @@ module BusinessCatalyst
         end
       end
 
-      def file_name_with_range(file_name, min, max)
-        file_name.sub(/(\.[\w\d]+$|$)/, "_rows_#{min}-#{max}\\1")
+      def file_name_with_range(base_name, min, max)
+        "#{base_name}_rows_#{min}-#{max}.csv"
       end
 
       def rename_last_file
         last_file = @all_files.pop
         if last_file
-          new_name = last_file.sub(/-\d+(\.[\w\d]+)?$/, "-#{total_rows}\\1")
+          new_name = last_file.sub(/-\d+\.csv\z/i, "-#{total_rows}.csv")
           FileUtils.mv last_file, new_name
           @all_files << new_name
         end
