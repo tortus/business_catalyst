@@ -5,7 +5,7 @@ module BusinessCatalyst
   module CSV
     describe FileSplitter do
       subject {
-        FileSplitter.new("test.csv", :max_rows_per_file => 10, :header_row => ["Column 1"], :verbose => false, :logger => nil)
+        FileSplitter.new("test", :max_rows_per_file => 10, :header_row => ["Column 1"], :verbose => false, :logger => nil)
       }
 
       after(:each) do
@@ -23,7 +23,7 @@ module BusinessCatalyst
       end
 
       def get_csv_writer_path(writer)
-        if RUBY_VERSION =~ /^1\.8/
+        if RUBY_VERSION =~ /\A1\.8/
           writer.send(:instance_variable_get, :@dev).path
         else
           writer.path
