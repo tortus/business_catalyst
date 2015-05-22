@@ -8,7 +8,7 @@ module BusinessCatalyst
       subject { SEOFriendlyUrlTransformer }
 
       before do
-        SEOFriendlyUrlTransformer.reset_global_urls
+        SEOFriendlyUrlTransformer.reset_global_urls!
       end
 
       it "raises InvalidInputError with blank input" do

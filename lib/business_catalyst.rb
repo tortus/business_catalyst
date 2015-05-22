@@ -33,4 +33,8 @@ module BusinessCatalyst
     name.strip.downcase.gsub(/[^a-z0-9\-]/, "-").gsub(/-{2,}/, "-").gsub(/\A-+|-+\Z/, "")
   end
 
+  def self.reset_global_urls!
+    BusinessCatalyst::CSV::SEOFriendlyUrlTransformer.reset_global_urls!
+  end
+
 end

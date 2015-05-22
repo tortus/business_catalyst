@@ -7,7 +7,7 @@ module BusinessCatalyst
       def initialize(input)
         input = input.to_s
         raise InvalidInputError, "seo_friendly_url must not be blank" if input.nil? || input.strip == ""
-        raise InvalidInputError, "seo_friendly_url must be globally_unique" unless self.class.is_globally_unique?(input)
+        raise InvalidInputError, "seo_friendly_url '#{input}' is not globally unique" unless self.class.is_globally_unique?(input)
         self.class.register_url(input)
         super(input)
       end
@@ -16,7 +16,7 @@ module BusinessCatalyst
         input
       end
 
-      def self.reset_global_urls
+      def self.reset_global_urls!
         @global_urls = {}
       end
 
