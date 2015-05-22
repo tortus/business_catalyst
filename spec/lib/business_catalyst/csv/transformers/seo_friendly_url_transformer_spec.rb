@@ -20,6 +20,11 @@ module BusinessCatalyst
         expect { subject.new("test") }.to raise_error(InvalidInputError)
       end
 
+      it "handles 'paper-napkins' situation correctly" do
+        subject.register_url("paper-napkins")
+        expect { subject.new("paper-napkins-1") }.not_to raise_error
+      end
+
       describe "#transform" do
         it "returns input with no changes (for now)" do
           expect(subject.transform("test")).to eq("test")
