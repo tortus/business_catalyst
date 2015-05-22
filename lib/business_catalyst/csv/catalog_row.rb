@@ -17,7 +17,7 @@ module BusinessCatalyst
         ["Browse Panel Min Price", :browse_panel_min_price, nil, CurrencyTransformer],
         ["Browse Panel Max Price", :browse_panel_max_price, nil, CurrencyTransformer],
         ["Browse Panel Slots", :browse_panel_min_slots],
-        ["SEO Friendly URL", :seo_friendly_url] # Must be globally unique
+        ["SEO Friendly URL", :seo_friendly_url, nil, SEOFriendlyUrlTransformer] # Must be globally unique
       ]
 
       def self.columns
