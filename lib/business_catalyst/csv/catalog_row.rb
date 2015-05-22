@@ -11,7 +11,7 @@ module BusinessCatalyst
         ["Expiry Date", :expiration_date],
         ["Template ID", :template_id, 0, TemplateIDTransformer],
         ["Enabled", :enabled?, true, BooleanTransformer],
-        ["Enable XML Feed", :enable_xml_feed?, false, BooleanTransformer],
+        ["Enable XML Feed", :enable_xml_feed?, true, BooleanTransformer],
         ["Show Product Prices", :show_product_prices?, true, BooleanTransformer],
         ["Catalog Title", :catalog_title],
         ["Browse Panel Min Price", :browse_panel_min_price, nil, CurrencyTransformer],
