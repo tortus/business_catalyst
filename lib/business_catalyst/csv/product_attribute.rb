@@ -22,6 +22,14 @@ module BusinessCatalyst
         @options ||= []
       end
 
+      # Usage:
+      #
+      #     # Simplest:
+      #     add_option(name, image, price)
+      #
+      #     # Manually create ProductAttribute::Option instance:
+      #     add_option(ProductAttribute::Option.new(name, image, price))
+      #
       def add_option(*args)
         option = nil
         if args.length == 1
@@ -41,6 +49,18 @@ module BusinessCatalyst
         option
       end
 
+      # Usage:
+      #
+      #     # Arrays:
+      #     add_options([name, image, price], [name, image, price], ...)
+      #
+      #     # Hashes:
+      #     add_options({name: name, image: image, price: price}, ...)
+      #
+      #     # ProductAttribute::Option instances:
+      #     option_1 = ProductAttribute::Option.new(name, image, price)
+      #     add_options(option_1, ...)
+      #
       def add_options(*args)
         if args.length > 1
           options = args
