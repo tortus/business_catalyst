@@ -5,13 +5,17 @@ module BusinessCatalyst
     class ProductAttribute
       Option = Struct.new(:name, :image, :price)
 
-      attr_accessor :name, :display_as, :required, :keep_stock
+      attr_accessor :name, :required, :keep_stock
+      attr_reader :display_as
 
-      def initialize(name, display_as = nil, required = false, keep_stock = false)
+      def initialize(name, options = {})
         @name = name
-        self.display_as = display_as
-        @required = required
-        @keep_stock = keep_stock
+        self.display_as = options.delete(:display_as) { nil }
+        @required = options.delete(:required) { false }
+        @keep_stock = options.delete(:keep_stock) { false }
+        unless options.empty?
+          raise ArgumentError, "unrecognized arguments: #{options.keys.inspect}"
+        end
       end
 
       def display_as=(value)
