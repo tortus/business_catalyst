@@ -21,7 +21,7 @@ module BusinessCatalyst
     class ArrayTransformer < Transformer
       def transform
         if input
-          input.map {|s| s.to_s.gsub(";", " ") }.join(";")
+          Array(input).map {|s| s.to_s.gsub(";", " ") }.join(";")
         end
       end
     end

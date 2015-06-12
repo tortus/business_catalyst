@@ -26,6 +26,12 @@ module BusinessCatalyst::CSV
     it "returns nil when input is nil" do
       subject.transform(nil).should be_nil
     end
+    it "passes scalar (non-array) input through" do
+      subject.transform("A").should eq("A")
+    end
+    it "removes semi-colons in scalar input" do
+      subject.transform("A;B").should eq("A B")
+    end
   end
 
   describe BooleanTransformer do
