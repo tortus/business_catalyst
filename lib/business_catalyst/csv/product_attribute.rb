@@ -55,6 +55,9 @@ module BusinessCatalyst
 
       # Usage:
       #
+      #     # List of names:
+      #     add_options("Name 1", "Name 2", ...)
+      #
       #     # Arrays:
       #     add_options([name, image, price], [name, image, price], ...)
       #
@@ -67,7 +70,7 @@ module BusinessCatalyst
       #
       def add_options(*args)
         if args.length > 1
-          options = args
+          options = args.map {|arg| Array(arg)}
         elsif args.first.respond_to?(:each)
           options = args.first
         else
