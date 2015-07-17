@@ -50,8 +50,8 @@ module BusinessCatalyst
         ["Product Code", :product_code, nil, ProductCodeTransformer],
         ["Name", :name],
         ["Description", :description],
-        ["Small Image", :small_image, nil, URITransformer],
-        ["Large Image", :large_image, nil, URITransformer],
+        ["Small Image", :small_image],
+        ["Large Image", :large_image],
         ["Catalog", :catalog, [], CatalogTransformer], # Can be an array of path names, or an array of arrays of path names (multiple catalogs)
         ["Sell Price", :sell_price, nil, CurrencyTransformer],
         ["Recommended Retail Price", :recommended_retail_price, nil, CurrencyTransformer],
