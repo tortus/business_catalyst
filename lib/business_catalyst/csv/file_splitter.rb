@@ -100,7 +100,7 @@ module BusinessCatalyst
       end
 
       def file_name_with_range(base_name, min, max)
-        "#{base_name}_rows_#{min}-#{max}.csv"
+        "#{base_name}_#{min}-#{max}.csv"
       end
 
       def rename_last_file
