@@ -17,7 +17,7 @@ module BusinessCatalyst
           # if it's already closed, awesome!
         end
 
-        Dir.glob("test_rows*").each do |test_file|
+        Dir.glob("test_*").each do |test_file|
           FileUtils.rm(test_file)
         end
       end
@@ -36,7 +36,7 @@ module BusinessCatalyst
         end
         it "opens a new file with the new row range appended" do
           subject.start do |splitter|
-            expect(get_csv_writer_path(splitter.current_file)).to eq("test_rows_1-10.csv")
+            expect(get_csv_writer_path(splitter.current_file)).to eq("test_1-10.csv")
           end
         end
       end
@@ -65,11 +65,11 @@ module BusinessCatalyst
           end
           it "opens a new file with the new row range appended" do
             subject.start_row
-            expect(get_csv_writer_path(subject.current_file)).to eq("test_rows_11-20.csv")
+            expect(get_csv_writer_path(subject.current_file)).to eq("test_11-20.csv")
           end
           it "appends the new file name to #all_files" do
             subject.start_row
-            expect(subject.all_files.last).to eq("test_rows_11-20.csv")
+            expect(subject.all_files.last).to eq("test_11-20.csv")
           end
           it "prepends the header row to the new file" do
             subject.header_row = ["Column 1", "Column 2"]
