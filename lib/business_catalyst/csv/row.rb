@@ -46,10 +46,18 @@ module BusinessCatalyst
         CurrencyTransformer.default_currency = currency
       end
 
-      def self.generate(file_name)
+      def self.generate(file_name, collection = nil)
         CSV.open(file_name, 'wb') do |csv|
           csv << headers
-          yield csv
+          if collection.respond_to?(:each_with_index)
+            collection.each_with_index do |item, index|
+              row = yield(item, index)
+              raise ArgumentError, "input must be a valid Row" unless row.kind_of?(self)
+              csv << row.to_a
+            end
+          else
+            yield csv
+          end
         end
       end
 
