@@ -64,7 +64,7 @@ module BusinessCatalyst
       #   end
       #
       def self.generate(file_name, collection = nil)
-        CSV.open(file_name, 'wb') do |csv|
+        ::CSV.open(file_name, 'wb') do |csv|
           csv << headers
           if collection.respond_to?(:each)
             collection.each do |item|
