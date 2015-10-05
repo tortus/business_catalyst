@@ -35,13 +35,17 @@ module BusinessCatalyst
         if input
           input_s = input.kind_of?(BigDecimal) ? input.to_s('F') : input.to_s.strip
           if input_s != ""
-            if input_s =~ BC_CURRENCY_REGEX
+            if is_bc_currency_string?(input_s)
               input_s
             else
               "#{currency}/#{input_s}"
             end
           end
         end
+      end
+
+      def is_bc_currency_string?(input)
+        !!(input =~ BC_CURRENCY_REGEX)
       end
     end
 
