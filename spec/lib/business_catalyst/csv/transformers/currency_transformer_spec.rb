@@ -53,6 +53,12 @@ module BusinessCatalyst
           subject.transform( [1.0, " 2.0 ", " ", "AU/3.0"] ).should eq("US/1.0;US/2.0;AU/3.0")
         end
       end
+
+      context "with a BigDecimal" do
+        it "converts input to floating point string, not default sci notation" do
+          expect(subject.transform(BigDecimal.new("1234.56"))).to eq("US/1234.56")
+        end
+      end
     end
 
   end

@@ -1,4 +1,6 @@
 # encoding: utf-8
+require 'bigdecimal'
+
 module BusinessCatalyst
   module CSV
 
@@ -30,11 +32,14 @@ module BusinessCatalyst
       end
 
       def number_to_currency(input)
-        if input && (input_s = input.to_s.strip) != ""
-          if input_s =~ BC_CURRENCY_REGEX
-            input_s
-          else
-            "#{currency}/#{input_s}"
+        if input
+          input_s = input.kind_of?(BigDecimal) ? input.to_s('F') : input.to_s.strip
+          if input_s != ""
+            if input_s =~ BC_CURRENCY_REGEX
+              input_s
+            else
+              "#{currency}/#{input_s}"
+            end
           end
         end
       end
