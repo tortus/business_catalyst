@@ -46,12 +46,29 @@ module BusinessCatalyst
         CurrencyTransformer.default_currency = currency
       end
 
+      # Nice shortcut for generating a csv.
+      # TODO: add option to usea file splitter.
+      #
+      # Manual:
+      #
+      #   ProductRow.generate("products.csv") do |csv|
+      #     products.each do |product|
+      #       csv << ProductRow.new(product).to_a
+      #     end
+      #   end
+      #
+      # Automatic collection handling:
+      #
+      #   ProductRow.generate("products.csv", products) do |product|
+      #     ProductRow.new(product)
+      #   end
+      #
       def self.generate(file_name, collection = nil)
         CSV.open(file_name, 'wb') do |csv|
           csv << headers
-          if collection.respond_to?(:each_with_index)
-            collection.each_with_index do |item, index|
-              row = yield(item, index)
+          if collection.respond_to?(:each)
+            collection.each do |item|
+              row = yield(item)
               raise ArgumentError, "input must be a valid Row" unless row.kind_of?(self)
               csv << row.to_a
             end
