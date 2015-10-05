@@ -1,4 +1,6 @@
 # encoding: utf-8
+require 'csv'
+
 module BusinessCatalyst
   module CSV
 
@@ -42,6 +44,13 @@ module BusinessCatalyst
       #
       def self.default_currency(currency)
         CurrencyTransformer.default_currency = currency
+      end
+
+      def self.generate(file_name)
+        CSV.open(file_name, 'wb') do |csv|
+          csv << headers
+          yield csv
+        end
       end
 
       def to_a
