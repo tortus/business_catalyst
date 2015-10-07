@@ -16,9 +16,9 @@ module BusinessCatalyst
       end
 
       def transform
-        normalized_input.map { |catalog_names|
-          if catalog_names.any?
-            sanitized_names = catalog_names.map { |name|
+        normalized_input.map { |path|
+          if path.any?
+            sanitized_names = path.map { |name|
               BusinessCatalyst.sanitize_catalog_name(name)
             }
             "/" + sanitized_names.join("/")

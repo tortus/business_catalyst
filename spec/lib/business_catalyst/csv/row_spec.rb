@@ -40,7 +40,6 @@ describe BusinessCatalyst::CSV::Row do
         end
       end
     end
-
   end
 
   describe "#csv_value(method, config)" do

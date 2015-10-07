@@ -27,6 +27,10 @@ module BusinessCatalyst
       it "converts all whitespace characters to single space" do
         subject.transform("A\n\nB").should eq("/A B")
       end
+
+      it "it joins multiple catalog path arrays with ';'" do
+        subject.transform([["Abrasives"], ["Abrasives", "Sleeves"]]).should eq("/Abrasives;/Abrasives/Sleeves")
+      end
     end
 
   end
