@@ -2,7 +2,7 @@
 
 module BusinessCatalyst
   module CSV
-    class URIArrayTransformer
+    class URIArrayTransformer < Transformer
 
       def transform
         if input
