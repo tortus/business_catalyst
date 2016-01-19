@@ -1,6 +1,6 @@
 # BusinessCatalyst
 
-Tools for building CSV's for Adobe Business Catalyst e-commerce platform in Ruby.
+Tools for building CSV's for Adobe Business Catalyst e-commerce platform in Ruby. Use a Ruby DSL to turn your data into CSV's that can be imported in the BC admin. Supports product and catalog CSV's, and splitting large CSV's (over 10k products) into multiple files.
 
 ## Installation
 
