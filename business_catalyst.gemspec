@@ -12,6 +12,7 @@ Gem::Specification.new do |spec|
   spec.summary       = "business_catalyst-#{BusinessCatalyst::VERSION}"
   spec.homepage      = "https://github.com/tortus/business_catalyst"
   spec.license       = "MIT"
+  spec.required_ruby_version = '>= 1.8.7'
 
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
