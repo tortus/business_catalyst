@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = BusinessCatalyst::VERSION
   spec.authors       = ["Tortus Tek, Inc."]
   spec.email         = ["support@tortus.com"]
-  spec.description   = %q{Libraries to help with exporting product data to BC.}
+  spec.description   = %q{Libraries to help with exporting product data to Adobe Business Catalyst. Use a Ruby DSL to turn your data into CSV's that can be imported in the BC admin. Supports product and catalog CSV's, and splitting large CSV's (over 10k products) into multiple files.}
   spec.summary       = "business_catalyst-#{BusinessCatalyst::VERSION}"
   spec.homepage      = "https://github.com/tortus/business_catalyst"
   spec.license       = "MIT"
