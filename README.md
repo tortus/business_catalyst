@@ -54,6 +54,8 @@ products.each do |product|
 end
 ```
 
+__Refer to https://github.com/tortus/business_catalyst/wiki for the complete list of columns.__
+
 ### Returning Ruby data types in your methods
 
 In general, you can define your methods to return Ruby types such as Array,

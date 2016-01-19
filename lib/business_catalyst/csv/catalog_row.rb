@@ -2,6 +2,7 @@ module BusinessCatalyst
   module CSV
     class CatalogRow < Row
 
+      # [Header, method, default, transformer]
       COLUMNS = [
         ["Catalog Name/Heirarchy", :catalog_name_hierarchy, nil, CatalogTransformer],
         ["Description", :description],
