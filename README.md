@@ -6,7 +6,7 @@ Tools for building CSV's for Adobe Business Catalyst e-commerce platform in Ruby
 
 Add this line to your application's Gemfile:
 
-    gem 'business_catalyst', '~> 0.1.0'
+    gem 'business_catalyst', '~> 0.1.1'
 
 And then execute:
 
