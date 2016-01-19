@@ -97,7 +97,7 @@ See the class definition for all available options.
 3. Run tests:
 
     $ bundle install
-    $ bundle exec rspec
+    $ bundle exec rspec spec
 
 4. Commit your changes (`git commit -am 'Add some feature'`)
 5. Push to the branch (`git push origin my-new-feature`)
