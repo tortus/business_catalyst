@@ -22,8 +22,9 @@ Start with subclassing any of the provided Row classes:
 Then define methods to return values for the various BC columns.
 Use the #map method to ensure correct naming. (In general, it is just the
 underscored version of the BC column name, with '?' appended for
-boolean columns. The COLUMNS constant in the base class has the complete
-list, and I recommend referring to it extensively.)
+boolean columns. __Refer to COLUMNS constant in the base class, or
+https://github.com/tortus/business_catalyst/wiki for a complete list
+of columns.__
 
 ### Building a Product CSV
 
