@@ -2,6 +2,8 @@
 
 Tools for building CSV's for Adobe Business Catalyst e-commerce platform in Ruby. Use a Ruby DSL to turn your data into CSV's that can be imported in the BC admin. Supports product and catalog CSV's, and splitting large CSV's (over 10k products) into multiple files.
 
+**Compatible with Ruby 1.8.7 and Ruby 2.3+.** Intended to be useful as a tool for migrating very old Rails sites, so we deliberately preserve Ruby 1.8 compatibility, even when it is a huge pain. Otherwise, we only maintain compatibility with the latest version because most sites that can run on 1.9 can be upgraded to 2.3 with **much** less effort.
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -78,7 +80,7 @@ map(:enabled?) { true } # becomes: "Y"
 ### If you have more than 10k product rows to import, use BusinessCatalyst::CSV::FileSplitter
 
 Business Catalyst limits the number of products you can import in a single
-CSV to 10000. However, you can get around this limit by importing multiple
+CSV to 10,000. However, you can get around this limit by importing multiple
 files. We have a class to help!
 
 ```ruby
