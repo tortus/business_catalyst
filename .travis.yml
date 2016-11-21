@@ -6,4 +6,4 @@ rvm:
   - 1.8.7
   - 2.3.2
   - jruby-18mode # JRuby in 1.8 mode
-  - jruby-head # Latest JRuby
+  - jruby # Latest JRuby
