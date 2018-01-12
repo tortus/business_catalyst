@@ -120,6 +120,29 @@ end
 
 ```
 
+### Notes on Currency
+
+You can always return prices as Ruby Numeric types, or a raw String in
+the format that BC understands "US/10.00".
+
+If you use a Ruby Numeric type, the current default currency will be used.
+If you send a String, it will pass through "as-is".
+
+You can also return an array of Strings or numbers. This will be joined with ";",
+allowing you to specify multiple prices.
+
+```ruby
+BusinessCatalyst::CSV::CurrencyTransformer.default_currency = "US"
+
+map(:sell_price) { 10 }
+# => "US/10.00"
+
+map(:sell_price) { ["US/10", "EU/12"] }
+# => "US/10.00;EU/12.00"
+
+```
+
+
 ## Contributing
 
 1. Fork it
