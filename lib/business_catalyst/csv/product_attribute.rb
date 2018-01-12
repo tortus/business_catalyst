@@ -1,28 +1,44 @@
 # encoding: utf-8
+
 module BusinessCatalyst
   module CSV
-
     # Usage:
     #
-    #     # Option with custom image and price:
-    #     size = BusinessCatalyst::CSV::ProductAttribute.new("Size", :display_as => :radio, :required => true, :keep_stock => false)
+    #     # Dropdowns with custom image and price:
+    #     size =  BusinessCatalyst::CSV::ProductAttribute.new("Size",
+    #               :display_as => :radio,
+    #               :required => true,
+    #               :keep_stock => false
+    #             )
     #     size.add_option("Small", "live/url/for/small.jpg", "US/20.00")
     #     size.add_option("Large", "live/url/for/large.jpg", "US/25.00")
     #
-    #     # Shorthand for multiple options with no image or price:
-    #     color = BusinessCatalyst::CSV::ProductAttribute.new("Size", :display_as => :dropdown, :required => true, :keep_stock => false)
+    #     # Shorthand for multiple radio buttons with no image or price:
+    #     color = BusinessCatalyst::CSV::ProductAttribute.new("Size",
+    #               :display_as => :radio,
+    #               :required => true,
+    #               :keep_stock => false
+    #             )
     #     color.add_options("Red", "Green", "Blue")
     #
-    #     # Checkboxes:
-    #     addon = BusinessCatalyst::CSV::ProductAttribute.new("Addon", :display_as => :checkbox, :required => false, :keep_stock => false)
+    #     # Checkboxes are supported as well:
+    #     addon = BusinessCatalyst::CSV::ProductAttribute.new("Addon",
+    #               :display_as => :checkbox,
+    #               :required => false,
+    #               :keep_stock => false
+    #             )
     #     addon.add_option("Cool thing 1", nil, "US/5.00")
     #
     class ProductAttribute
       Option = Struct.new(:name, :image, :price)
 
-      attr_accessor :name, :required, :keep_stock
-      attr_reader :display_as
+      attr_accessor :name, :required, :keep_stock, :display_as
 
+      # Available options:
+      #
+      # * :display_as => :dropdown / :checkbox / :radio
+      # * :required => true / false
+      # * :keep_stock => true / false
       def initialize(name, options = {})
         @name = name
         self.display_as = options.delete(:display_as) { nil }
