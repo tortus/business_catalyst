@@ -45,11 +45,9 @@ module BusinessCatalyst
       end
 
       def bc_currency_string?(input)
-        input.match?(BC_CURRENCY_REGEX)
+        !!(input =~ BC_CURRENCY_REGEX)
       end
 
     end
-
-    CurrencyTransformer.default_currency = "US".freeze
   end
 end
