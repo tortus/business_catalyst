@@ -148,7 +148,11 @@ the format that BC understands "US/10.00".
 * You can also return an array of Strings or numbers. These will be converted to the correct string format and joined with ";" allowing you to specify multiple prices.
 
 ```ruby
+# Be super-verbose if you want:
 BusinessCatalyst::CSV::CurrencyTransformer.default_currency = "US"
+
+# Or use the shorthand ProductRow class method:
+default_currency "US"
 
 map(:sell_price) { 10 }
 # => "US/10.00"
