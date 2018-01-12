@@ -20,8 +20,8 @@ And then execute:
 
 Start with subclassing any of the provided Row classes:
 
-* (BusinessCatalyst::CSV::ProductRow)[lib/business_catalyst/csv/product_row.rb]
-* (BusinessCatalyst::CSV::CatalogRow)[lib/business_catalyst/csv/catalog_row.rb]
+* (BusinessCatalyst::CSV::ProductRow)[./lib/business_catalyst/csv/product_row.rb]
+* (BusinessCatalyst::CSV::CatalogRow)[./lib/business_catalyst/csv/catalog_row.rb]
 
 Then define methods to return values for the various BC columns.
 Use the #map method to ensure correct naming. (In general, it is just the
