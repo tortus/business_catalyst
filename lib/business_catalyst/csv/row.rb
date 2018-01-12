@@ -26,6 +26,8 @@ module BusinessCatalyst
 
       # Define value for BC column using a block. Column argument should be
       # one of the mapping name symbols returned by Row.columns.
+      #
+      # Throws NoSuchColumnError if column is not valid.
       def self.map(column, &block)
         unless columns.any? {|c| c[1] == column}
           raise NoSuchColumnError, "no such column '#{column.inspect}'"
