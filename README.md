@@ -2,6 +2,8 @@
 
 ![CI Status](https://travis-ci.org/tortus/business_catalyst.svg?branch=master)
 
+[RDoc API Documention](http://www.rubydoc.info/gems/business_catalyst/)
+
 Tools for building CSV's for Adobe Business Catalyst e-commerce platform in Ruby. Use a Ruby DSL to turn your data into CSV's that can be imported in the BC admin. Supports product and catalog CSV's, and splitting large CSV's (over 10k products) into multiple files.
 
 **Compatible with Ruby 1.8.7 and Ruby 2.3+.** Intended to be useful as a tool for migrating very old Rails sites, so we deliberately preserve Ruby 1.8 compatibility, even when it is a huge pain. Otherwise, we only maintain compatibility with the latest version because most sites that can run on 1.9 can be upgraded to 2.3 with **much** less effort.
@@ -10,7 +12,7 @@ Tools for building CSV's for Adobe Business Catalyst e-commerce platform in Ruby
 
 Add this line to your application's Gemfile:
 
-    gem 'business_catalyst', '~> 0.1.1'
+    gem 'business_catalyst', '~> 0.1.2'
 
 And then execute:
 
@@ -141,14 +143,18 @@ end
 ### Notes on Currency
 
 You can always return prices as Ruby Numeric types, or a raw String in
-the format that BC understands "US/10.00".
+the format that BC understands: "US/10.00".
 
 * If you ureturn a Ruby Numeric type, the "default currency" will be used.
 * If you return a String, it will pass through "as-is".
 * You can also return an array of Strings or numbers. These will be converted to the correct string format and joined with ";" allowing you to specify multiple prices.
 
 ```ruby
+# Be super-verbose if you want:
 BusinessCatalyst::CSV::CurrencyTransformer.default_currency = "US"
+
+# Or use the shorthand ProductRow class method:
+default_currency "US"
 
 map(:sell_price) { 10 }
 # => "US/10.00"
