@@ -10,4 +10,14 @@ if Gem::Version.new(RUBY_VERSION.dup) >= Gem::Version.new('1.9.3')
     gem 'ruby_gntp'
     gem 'guard-rspec'
   end
+
+  group :rdoc do
+    # allow any desired modern version of rdoc if using modern Ruby
+    gem 'rdoc', '>= 3.12.2'
+  end
+else
+  group :rdoc do
+    # latest that works with ruby 1.8
+    gem 'rdoc', '~> 3.12.2'
+  end
 end
