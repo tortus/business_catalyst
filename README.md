@@ -28,7 +28,7 @@ Use the #map method to ensure correct naming. (In general, it is just the
 underscored version of the BC column name, with '?' appended for
 boolean columns. __Refer to COLUMNS constant in the base class, or
 https://github.com/tortus/business_catalyst/wiki for a complete list
-of columns.__
+of columns.__)
 
 ### Building a Product CSV
 
