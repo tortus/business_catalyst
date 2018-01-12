@@ -97,6 +97,29 @@ end
 ```
 See the class definition for all available options.
 
+### Product Attributes
+
+This gem has full support for multiple product attributes with multiple options.
+In your attributes column definition, create and return one or more instances
+of BusinessCatalyst::CSV::ProductAttribute.
+
+```ruby
+class MyRow < BusinessCatalyst::CSV::ProductRow
+  map :attributes do
+    size = BusinessCatalyst::CSV::ProductAttribute.new
+    size.add_options("Small", "Medium", "Large")
+
+    color = BusinessCatalyst::CSV::ProductAttribute.new
+    color.add_option("Red", "live/url/for/red.jpg", "US/25.0")
+    color.add_option("Green", "live/url/for/green.jpg", "US/22.0")
+    color.add_option("Blue", "live/url/for/blue.jpg", "US/26.0")
+
+    [size, color]
+  end
+end
+
+```
+
 ## Contributing
 
 1. Fork it
