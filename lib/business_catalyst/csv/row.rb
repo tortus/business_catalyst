@@ -1,18 +1,16 @@
 # encoding: utf-8
+
 require 'csv'
 
 module BusinessCatalyst
   module CSV
-
+    # Raised when trying to call #map with a bad column name
     class NoSuchColumnError < StandardError; end
 
     # Shared logic for building a row for a CSV export for Business Catalust.
     # Instead of sublcassing Row directly in your project, subclass CatalogRow
     # or ProductRow, which have column definitions set up for those tables.
     class Row
-      def initialize(*args)
-      end
-
       # Override to return Array of column config Arrays in the format:
       #
       #   [
@@ -20,8 +18,8 @@ module BusinessCatalyst
       #     ...
       #   ]
       #
-      # "default_value" and "TransformerClass" are optional, and will default to nil and
-      # GenericTransformer, respectively, if not specified.
+      # "default_value" and "TransformerClass" are optional, and will default to
+      # nil and GenericTransformer, respectively, if not specified.
       def self.columns
         raise NotImplementedError, "Implement to return Array of column config Arrays in the format: [[\"Header\", :mapping_name, default_value, TransformerClass]]"
       end
@@ -47,7 +45,7 @@ module BusinessCatalyst
       end
 
       # Nice shortcut for generating a csv.
-      # TODO: add option to usea file splitter.
+      # Does not yet allow the use of a FileSplitter.
       #
       # Manual:
       #
@@ -101,8 +99,6 @@ module BusinessCatalyst
         transformer = config.fetch(3, GenericTransformer)
         transformer.transform(input)
       end
-
     end
-
   end
 end
