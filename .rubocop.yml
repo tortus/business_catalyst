@@ -28,14 +28,7 @@ Style/OptionHash:
 Style/StringLiterals:
   Enabled: false
   # EnforcedStyle: single_quotes
-  # ConsistentQuotesInMultiline: true
-
-Style/TrailingCommaInArrayLiteral:
-  EnforcedStyleForMultiline: no_comma
-
-
-Style/TrailingCommaInHashLiteral:
-  EnforcedStyleForMultiline: no_comma
+  ConsistentQuotesInMultiline: true
 
 Layout/DotPosition:
   EnforcedStyle: trailing
