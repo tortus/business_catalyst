@@ -2,6 +2,21 @@
 module BusinessCatalyst
   module CSV
 
+    # Usage:
+    #
+    #     # Option with custom image and price:
+    #     size = BusinessCatalyst::CSV::ProductAttribute.new("Size", :display_as => :radio, :required => true, :keep_stock => false)
+    #     size.add_option("Small", "live/url/for/small.jpg", "US/20.00")
+    #     size.add_option("Large", "live/url/for/large.jpg", "US/25.00")
+    #
+    #     # Shorthand for multiple options with no image or price:
+    #     color = BusinessCatalyst::CSV::ProductAttribute.new("Size", :display_as => :dropdown, :required => true, :keep_stock => false)
+    #     color.add_options("Red", "Green", "Blue")
+    #
+    #     # Checkboxes:
+    #     addon = BusinessCatalyst::CSV::ProductAttribute.new("Addon", :display_as => :checkbox, :required => false, :keep_stock => false)
+    #     addon.add_option("Cool thing 1", nil, "US/5.00")
+    #
     class ProductAttribute
       Option = Struct.new(:name, :image, :price)
 
