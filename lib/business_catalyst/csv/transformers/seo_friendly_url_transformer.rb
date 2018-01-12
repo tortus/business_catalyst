@@ -1,13 +1,20 @@
 # encoding: utf-8
+
 module BusinessCatalyst
   module CSV
-
+    # When defining an SEO-friendly URL, it will have a number appended to it
+    # if it is not globally unique. This transformer checks for uniqueness
+    # of the input. It does NOT perform any conversion.
     class SEOFriendlyUrlTransformer < Transformer
 
       def initialize(input)
         input = input.to_s
-        raise InvalidInputError, "seo_friendly_url must not be blank" if input.nil? || input.strip == ""
-        raise InvalidInputError, "seo_friendly_url '#{input}' is not globally unique" unless self.class.is_globally_unique?(input)
+        if input.nil? || input.strip == ""
+          raise InvalidInputError, "seo_friendly_url must not be blank"
+        end
+        unless self.class.globally_unique?(input)
+          raise InvalidInputError, "seo_friendly_url '#{input}' is not globally unique"
+        end
         self.class.register_url(input)
         super(input)
       end
@@ -28,11 +35,10 @@ module BusinessCatalyst
         global_urls[url] = true
       end
 
-      def self.is_globally_unique?(url)
+      def self.globally_unique?(url)
         !global_urls.fetch(url, false)
       end
 
     end
-
   end
 end

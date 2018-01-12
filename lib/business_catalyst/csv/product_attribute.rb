@@ -30,9 +30,11 @@ module BusinessCatalyst
     #     addon.add_option("Cool thing 1", nil, "US/5.00")
     #
     class ProductAttribute
+
       Option = Struct.new(:name, :image, :price)
 
-      attr_accessor :name, :required, :keep_stock, :display_as
+      attr_accessor :name, :required, :keep_stock
+      attr_reader :display_as
 
       # Available options:
       #
@@ -69,9 +71,9 @@ module BusinessCatalyst
         option = nil
         if args.length == 1
           arg = args.first
-          if arg.kind_of?(Option)
+          if arg.is_a?(Option)
             option = arg
-          elsif arg.kind_of?(Hash)
+          elsif arg.is_a?(Hash)
             option = Option.new(arg.fetch(:name), arg.fetch(:image, nil), arg.fetch(:price, nil))
           else
             raise ArgumentError, "unrecognized argument: #{arg.inspect}"
@@ -109,17 +111,17 @@ module BusinessCatalyst
         end
 
         options.each do |option|
-          if option.kind_of?(Hash)
+          if option.is_a?(Hash)
             name = option.fetch(:name)
             image = option.fetch(:image, nil)
             price = option.fetch(:price, nil)
             add_option(name, image, price)
 
-          elsif option.kind_of?(Array)
+          elsif option.is_a?(Array)
             name, image, price = *option
             add_option(name, image, price)
 
-          elsif option.kind_of?(Option)
+          elsif option.is_a?(Option)
             add_option(option)
 
           else
@@ -136,7 +138,7 @@ module BusinessCatalyst
       # * :checkbox = 6
       # * :radio    = 7
       def self.normalize_display_as(display_as)
-        if display_as.kind_of?(Symbol)
+        if display_as.is_a?(Symbol)
           case display_as
           when :dropdown
             5
@@ -155,6 +157,5 @@ module BusinessCatalyst
       end
 
     end
-
   end
 end

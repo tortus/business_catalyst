@@ -1,5 +1,8 @@
+# encoding: utf-8
+
 module BusinessCatalyst
   module CSV
+    # Base class for exporting BC catalogs
     class CatalogRow < Row
 
       # [Header, method, default, transformer]
@@ -19,7 +22,7 @@ module BusinessCatalyst
         ["Browse Panel Max Price", :browse_panel_max_price, nil, CurrencyTransformer],
         ["Browse Panel Slots", :browse_panel_min_slots],
         ["SEO Friendly URL", :seo_friendly_url, nil, SEOFriendlyUrlTransformer] # Must be globally unique
-      ]
+      ].map!(&:freeze).freeze
 
       def self.columns
         COLUMNS

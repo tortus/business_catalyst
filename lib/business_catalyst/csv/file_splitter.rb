@@ -1,17 +1,17 @@
 # encoding: utf-8
-require 'csv'
-require 'fileutils'
 
 module BusinessCatalyst
   module CSV
-
     # Business Catalyst can only import 10k product rows at a time.
     # Use this class to help split up files.
     #
     # == Usage
     #
     #     headers = MyRowClass.headers
-    #     splitter = FileSplitter.new("output_base_name", max_rows_per_file: 10_000, header_row: headers)
+    #     splitter = FileSplitter.new("output_base_name",
+    #                    :max_rows_per_file => 10_000,
+    #                    :header_row => headers
+    #                )
     #     splitter.start do |splitter|
     #       product_rows.each do |row|
     #         splitter.start_row
@@ -28,7 +28,8 @@ module BusinessCatalyst
     #
     class FileSplitter
 
-      attr_accessor :base_name, :max_rows_per_file, :header_row, :verbose, :logger
+      attr_accessor :base_name, :max_rows_per_file, :header_row, :verbose,
+                    :logger
       attr_reader :current_row, :total_rows, :current_file, :all_files
 
       alias_method :file_names, :all_files
@@ -49,7 +50,8 @@ module BusinessCatalyst
 
       def start
         begin
-          increment_file(1, max_rows_per_file) # will be off by one unless we set manually
+          # will be off by one unless we set manually
+          increment_file(1, max_rows_per_file)
           yield self
         ensure
           close
@@ -75,7 +77,7 @@ module BusinessCatalyst
         current_file.close if current_file
       end
 
-    private
+      private
 
       def increment_file(min_row = total_rows, max_row = total_rows + max_rows_per_file - 1)
         @current_file.close if @current_file
@@ -90,12 +92,12 @@ module BusinessCatalyst
       end
 
       def trigger_on_file_change
-        if @on_file_change.kind_of?(Proc)
-          if @on_file_change.arity >= 1
-            @on_file_change.call(self)
-          else
-            @on_file_change.call
-          end
+        return unless @on_file_change.is_a?(Proc)
+
+        if @on_file_change.arity >= 1
+          @on_file_change.call(self)
+        else
+          @on_file_change.call
         end
       end
 
@@ -105,11 +107,11 @@ module BusinessCatalyst
 
       def rename_last_file
         last_file = @all_files.pop
-        if last_file
-          new_name = last_file.sub(/-\d+\.csv\z/i, "-#{total_rows}.csv")
-          FileUtils.mv last_file, new_name
-          @all_files << new_name
-        end
+        return unless last_file
+
+        new_name = last_file.sub(/-\d+\.csv\z/i, "-#{total_rows}.csv")
+        FileUtils.mv last_file, new_name
+        @all_files << new_name
       end
 
       def log(msg)

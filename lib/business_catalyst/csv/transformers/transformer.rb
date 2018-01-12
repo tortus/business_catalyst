@@ -1,8 +1,10 @@
 # encoding: utf-8
+
 module BusinessCatalyst
   module CSV
-
+    # Abstract base class for transforming some input to a BC string.
     class Transformer
+
       attr_accessor :input
 
       def initialize(input)
@@ -14,9 +16,9 @@ module BusinessCatalyst
       end
 
       def self.transform(input)
-        self.new(input).transform
+        new(input).transform
       end
-    end
 
+    end
   end
 end

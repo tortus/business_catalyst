@@ -1,7 +1,8 @@
 # encoding: utf-8
+
 module BusinessCatalyst
   module CSV
-
+    # Validates a product code and converts it to String.
     class ProductCodeTransformer < Transformer
 
       def initialize(input)
@@ -16,6 +17,5 @@ module BusinessCatalyst
       end
 
     end
-
   end
 end

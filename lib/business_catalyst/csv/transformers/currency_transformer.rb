@@ -1,18 +1,18 @@
 # encoding: utf-8
-require 'bigdecimal'
 
 module BusinessCatalyst
   module CSV
-
+    # Convert all manner of input to BC currency strings
     class CurrencyTransformer < Transformer
-      BC_CURRENCY_REGEX = /\A\w+\/\d/.freeze
 
-      def self.default_currency
-        @default_currency || "US"
-      end
+      BC_CURRENCY_REGEX = %r{\A\w+/\d}
 
-      def self.default_currency=(currency)
-        @default_currency = currency
+      class << self
+        def default_currency
+          @default_currency || "US".freeze
+        end
+
+        attr_writer :default_currency
       end
 
       attr_accessor :currency
@@ -23,31 +23,33 @@ module BusinessCatalyst
       end
 
       def transform
-        if input
-          inputs = Array(input).map {|n| number_to_currency(n) }.compact
-          if inputs.any?
-            inputs.join(";")
-          end
-        end
+        return nil unless input
+
+        inputs = Array(input).map { |n| number_to_currency(n) }.compact
+        return nil unless inputs.any?
+
+        inputs.join(";")
       end
 
       def number_to_currency(input)
-        if input
-          input_s = input.kind_of?(BigDecimal) ? input.to_s('F') : input.to_s.strip
-          if input_s != ""
-            if is_bc_currency_string?(input_s)
-              input_s
-            else
-              "#{currency}/#{input_s}"
-            end
-          end
+        return nil unless input
+
+        input_s = input.is_a?(BigDecimal) ? input.to_s('F') : input.to_s.strip
+        return nil if input_s.empty?
+
+        if bc_currency_string?(input_s)
+          input_s
+        else
+          "#{currency}/#{input_s}"
         end
       end
 
-      def is_bc_currency_string?(input)
-        !!(input =~ BC_CURRENCY_REGEX)
+      def bc_currency_string?(input)
+        input.match?(BC_CURRENCY_REGEX)
       end
+
     end
 
+    CurrencyTransformer.default_currency = "US".freeze
   end
 end

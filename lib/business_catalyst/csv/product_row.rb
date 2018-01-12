@@ -1,7 +1,7 @@
 # encoding: utf-8
+
 module BusinessCatalyst
   module CSV
-
     # Subclass and call #map to set values for columns. You may return
     # arrays for columns that take multiple values, like catalog,
     # and true/false for boolean columns.
@@ -103,7 +103,7 @@ module BusinessCatalyst
         ["Variation Options", :variations_options],
         ["Role Responsible", :role_responsible],
         ["Product Meta Description", :product_meta_description]
-      ]
+      ].map(&:freeze).freeze
 
     end
   end

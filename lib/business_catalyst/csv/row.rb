@@ -1,7 +1,5 @@
 # encoding: utf-8
 
-require 'csv'
-
 module BusinessCatalyst
   module CSV
     # Raised when trying to call #map with a bad column name
@@ -11,6 +9,7 @@ module BusinessCatalyst
     # Instead of sublcassing Row directly in your project, subclass CatalogRow
     # or ProductRow, which have column definitions set up for those tables.
     class Row
+
       # Override to return Array of column config Arrays in the format:
       #
       #   [
@@ -89,7 +88,7 @@ module BusinessCatalyst
       end
 
       def csv_value(method, config = nil)
-        config ||= self.class.columns.find {|c| c[1] == method}
+        config ||= self.class.columns.find { |c| c[1] == method }
         raise NoSuchColumnError, "no configuration found for #{method.inspect} in #{self.class.to_s}.columns" if config.nil?
 
         input = if respond_to?(method)
@@ -101,6 +100,7 @@ module BusinessCatalyst
         transformer = config.fetch(3, GenericTransformer)
         transformer.transform(input)
       end
+
     end
   end
 end
