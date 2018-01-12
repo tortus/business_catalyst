@@ -106,17 +106,17 @@ of BusinessCatalyst::CSV::ProductAttribute.
 ```ruby
 class MyRow < BusinessCatalyst::CSV::ProductRow
   map :attributes do
-    # Shorthange usage with no price differences or images
+    # Shorthand usage with no price differences or images
     size = BusinessCatalyst::CSV::ProductAttribute.new("Size", :display_as => :dropdown, :required => true, :keep_stock => false)
     size.add_options("Small", "Medium", "Large")
 
-    # Usage with images and different prices for each option
-    color = BusinessCatalyst::CSV::ProductAttribute.new("Color", :display_as => :dropdown, :required => true, :keep_stock => false)
+    # Radio buttons with images and different prices for each option
+    color = BusinessCatalyst::CSV::ProductAttribute.new("Color", :display_as => :radio, :required => true, :keep_stock => false)
     color.add_option("Red", "live/url/for/red.jpg", "US/25.0")
     color.add_option("Green", "live/url/for/green.jpg", "US/22.0")
     color.add_option("Blue", "live/url/for/blue.jpg", "US/26.0")
 
-    # Checkbox example
+    # Checkbox example without images
     addon = BusinessCatalyst::CSV::ProductAttribute.new("Addon", :display_as => :checkbox, :required => false, :keep_stock => false)
     addon.add_option("Some cool bling", nil, "US/5.00")
 
