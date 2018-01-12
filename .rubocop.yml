@@ -1,0 +1,49 @@
+AllCops:
+  TargetRubyVersion: 2.2.0
+
+Style/Alias:
+  EnforcedStyle: prefer_alias_method
+
+Style/Encoding:
+  Enabled: false
+
+Style/Copyright:
+  Enabled: false
+  Notice: '^Copyright (\(c\) )?2[0-9]{3} .+'
+  AutocorrectNotice: ''
+
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: never
+
+Style/HashSyntax:
+  EnforcedStyle: hash_rockets
+  UseHashRocketsWithSymbolValues: true
+
+Style/Lambda:
+  EnforcedStyle: lambda
+
+Style/OptionHash:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: false
+  # EnforcedStyle: single_quotes
+  # ConsistentQuotesInMultiline: true
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: no_comma
+
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: no_comma
+
+Layout/DotPosition:
+  EnforcedStyle: trailing
+
+Layout/EmptyLineAfterMagicComment:
+  Enabled: true
+
+Layout/EmptyLinesAroundClassBody:
+  EnforcedStyle: empty_lines
+  Exclude:
+    - '**/transformers.rb'
