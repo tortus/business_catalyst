@@ -6,7 +6,7 @@ require 'business_catalyst/version'
 Gem::Specification.new do |spec|
   spec.name          = "business_catalyst"
   spec.version       = BusinessCatalyst::VERSION
-  spec.authors       = ["Tortus Tek, Inc."]
+  spec.authors       = ["William Makley"]
   spec.email         = ["support@tortus.com"]
   spec.description   = %q{Tools for creating CSV's for the Adobe Business Catalyst e-commerce platform in Ruby. Use a Ruby DSL to turn your data into CSV's that can be imported in the BC admin. Supports product and catalog CSV's, and splitting large CSV's (over 10k products) into multiple files.}
   spec.summary       = "business_catalyst-#{BusinessCatalyst::VERSION}"
